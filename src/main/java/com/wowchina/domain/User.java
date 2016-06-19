@@ -1,4 +1,4 @@
-package com.link.domain;
+package com.wowchina.domain;
 
 public class User {
 

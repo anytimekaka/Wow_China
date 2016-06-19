@@ -27,7 +27,7 @@
   	</filter>
 	<filter>
 	     <filter-name>DemoFilter</filter-name>
-	     <filter-class>com.link.filter.DemoFilter</filter-class>
+	     <filter-class>com.wowchina.filter.DemoFilter</filter-class>
 	</filter>
 	
 	<!-- ============================= filter mapping============================= -->
@@ -51,10 +51,6 @@
   	</listener>
     
     <!-- ============================= servlet ============================= -->
-    <servlet>
-		<servlet-name>index</servlet-name>
-		<servlet-class>com.sfit.api.InitServlet</servlet-class>
-	</servlet>
     <servlet>
 		<servlet-name>spring-mvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
