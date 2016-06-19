@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+                         "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<!-- ============================= Spring config context ============================= -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/context-root.xml</param-value>
+	</context-param>
+	<context-param>  
+        <param-name>log4jConfigLocation</param-name>  
+        <param-value>/WEB-INF/log4j.properties</param-value>  
+    </context-param>  
+    <context-param>  
+        <param-name>log4jRefreshInterval</param-name>  
+        <param-value>60000</param-value>  
+    </context-param>
+	
+	<!-- ============================= filter ============================= -->
+	<filter>  
+    	<filter-name>encodingFilter</filter-name>  
+    	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+    	<init-param>  
+        	<param-name>encoding</param-name>  
+        	<param-value>UTF-8</param-value>  
+    	</init-param>  
+  	</filter>
+	<filter>
+	     <filter-name>DemoFilter</filter-name>
+	     <filter-class>com.link.filter.DemoFilter</filter-class>
+	</filter>
+	
+	<!-- ============================= filter mapping============================= -->
+	<filter-mapping>  
+    	<filter-name>encodingFilter</filter-name>  
+    	<url-pattern>/*</url-pattern>  
+  	</filter-mapping>  
+  	<filter-mapping>
+	     <filter-name>DemoFilter</filter-name>
+	     <url-pattern>/demo.action</url-pattern>
+	</filter-mapping>
+	
+	<!-- ============================= listener ============================= -->
+	<listener>  
+        <listener-class>  
+            org.springframework.web.util.Log4jConfigListener  
+        </listener-class>  
+    </listener> 
+    <listener>
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  	</listener>
+    
+    <!-- ============================= servlet ============================= -->
+    <servlet>
+		<servlet-name>index</servlet-name>
+		<servlet-class>com.sfit.api.InitServlet</servlet-class>
+	</servlet>
+    <servlet>
+		<servlet-name>spring-mvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+    <!-- ============================= servlet mapping ============================= -->
+	
+	<servlet-mapping>
+		<servlet-name>spring-mvc</servlet-name>
+		<url-pattern>*.action</url-pattern>
+	</servlet-mapping>
+   	
+   	<!-- ============================= session-config ============================= -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	
+	<!-- ============================= welcome-file-list ============================= -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+	<!-- ============================= error-page ============================= -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/global/error404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/global/error500.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/global/exception.jsp</location>
+	</error-page>
+
+	<!-- ============================= taglib ============================= -->
+
+	<!-- ============================= security-constraint ============================= -->
+	<security-constraint>
+		<web-resource-collection>
+		   <web-resource-name>Forbidden</web-resource-name>
+		   <url-pattern>/*</url-pattern>
+		   <http-method>PUT</http-method>
+		   <http-method>DELETE</http-method>
+		   <http-method>TRACE</http-method>
+		   <http-method>OPTIONS</http-method> 
+		</web-resource-collection>
+	    <auth-constraint></auth-constraint>
+    </security-constraint>
+    
+    <!-- ============================= login-config ============================= -->
+    <login-config>  
+		<auth-method>BASIC</auth-method>  
+    </login-config>
+</web-app>

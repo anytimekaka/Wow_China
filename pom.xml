@@ -1,0 +1,264 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.restfulDemo</groupId>
+	<artifactId>restfulDemo</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>RestfulDemo Maven Webapp</name>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<spring.version>3.2.8.RELEASE</spring.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring</artifactId>
+			<scope>provided</scope>
+			<version>2.5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xmlParserAPIs</artifactId>
+			<version>2.6.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xerces</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.6.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.20</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.4.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.27</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<finalName>RestfulDemo</finalName>
+
+		<resources>
+			<!-- 先指定 src/main/config下所有文件及文件夹为资源文件 -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+			
+			<!-- 设置对config.properties进行过虑，即文件中的${key}会被替换掉为真正的值 --> 
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>config.properties</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+	<profiles>
+
+		<profile>
+			<id>dev</id>
+
+			<!-- 默认激活开发配制，使用config-dev.properties来替换设置过虑的资源文件中的${key} -->
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<filters>
+					<filter>src/main/config/config-dev.properties</filter>
+				</filters>
+			</build>
+		</profile>
+		<profile>
+			<id>product</id>
+			<build>
+				<filters>
+					<filter>src/main/config/config-prod.properties</filter>
+				</filters>
+			</build>
+		</profile> 
+	
+		<!-- <profile>
+			<id>dev</id>
+			<properties>
+				<shortMessage.alert>5</shortMessage.alert>
+				<shortMessage.stop>10</shortMessage.stop>
+				<message.session.timeout>1</message.session.timeout>
+				<alert.email>wang.guisheng@sfit.shfe.com.cn,bi.jingcheng@sfit.shfe.com.cn</alert.email>
+				<alert.phone>18221737957,18930834001,13564269706,13917410525,18616681330,15021106006</alert.phone>
+				<uploadFile.dir>C:/Users/wang.guisheng/Desktop/Temp/temp/</uploadFile.dir>
+				<view.config.cache.sweepInterval>20</view.config.cache.sweepInterval>
+				<view.config.cache.minCheckInterval>10</view.config.cache.minCheckInterval>
+				<view.config.cache.timeout>50</view.config.cache.timeout>
+				<email.smtp>mail.shfe.com.cn</email.smtp>
+				<email.from>SimNow@sfit.shfe.com.cn</email.from>
+				<email.password>sfituser_123</email.password>
+				<shortmail.url>http://172.19.112.14:13013/cgi-bin/sendsms</shortmail.url>
+				<oracle.url>172.19.121.28:1521:sisuo</oracle.url>
+				<oracle.driver.url>jdbc:oracle:thin:@//172.19.121.28:1521/sisuo</oracle.driver.url>
+				<oracle.username>ds</oracle.username>
+				<oracle.password>ds</oracle.password>
+				<oracle.username.settlement>settlement</oracle.username.settlement>
+				<oracle.password.settlement>settlement</oracle.password.settlement>
+				<flux.access.token_url>http://121.40.18.106/srv/srv/getToken</flux.access.token_url>
+				<flux.access.order_url>http://121.40.18.106/srv/srv/order</flux.access.order_url>
+				<flux.access.appkey>e9hj348df92wj34</flux.access.appkey>
+				<flux.access.appsecret>9is23wq12i9ud65xn2w6u87y</flux.access.appsecret>
+				<mysql.url>172.19.121.28:3306/xuetang</mysql.url>
+				<mysql.username>root</mysql.username>
+				<mysql.password>mysql</mysql.password>
+
+				<db.xuetang.url>jdbc:mysql://172.19.121.28:3306/xuetang</db.xuetang.url>
+				<db.xuetang.username>root</db.xuetang.username>
+				<db.xuetang.password>mysql</db.xuetang.password>
+
+				<deploy.environment>dev</deploy.environment>
+				<sms.url>http://172.19.121.28:8081/sms/sms</sms.url>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile> -->
+
+		<!-- <profile>
+			<id>prod</id>
+			<properties>
+				<shortMessage.alert>500</shortMessage.alert>
+				<shortMessage.stop>1000</shortMessage.stop>
+				<message.session.timeout>120</message.session.timeout>
+				<alert.email>wang.guisheng@sfit.shfe.com.cn,bi.jingcheng@sfit.shfe.com.cn,liu.changsheng@sfit.shfe.com.cn,deng.yongsheng@sfit.shfe.com.cn,yin.xujun@sfit.shfe.com.cn,tang.jiahao@sfit.shfe.com.cn</alert.email>
+				<alert.phone>18221737957,18930834001,13564269706,13917410525,18616681330,15021106006</alert.phone>
+				<uploadFile.dir>/home/simnowTomcat/webapps/uploadFile/</uploadFile.dir>
+				<view.config.cache.sweepInterval>3000</view.config.cache.sweepInterval>
+				<view.config.cache.minCheckInterval>5000</view.config.cache.minCheckInterval>
+				<view.config.cache.timeout>60000</view.config.cache.timeout>
+				<email.smtp>zjmail.shfe.com.cn</email.smtp>
+				<email.from>simNow@simNow.com</email.from>
+				<email.password></email.password>
+				<shortmail.url>http://127.0.0.1:13013/cgi-bin/sendsms</shortmail.url>
+				<oracle.url>172.17.161.5:1521:asp</oracle.url>
+				<oracle.driver.url>jdbc:oracle:thin:@//172.17.161.5:1521/asp</oracle.driver.url>
+				<oracle.username>ds</oracle.username>
+				<oracle.password>ds</oracle.password>
+				<oracle.username.settlement>settlement</oracle.username.settlement>
+				<oracle.password.settlement>settlement</oracle.password.settlement>
+				<flux.access.token_url>http://121.40.18.106/srv/srv/getToken</flux.access.token_url>
+				<flux.access.order_url>http://121.40.18.106/srv/srv/order</flux.access.order_url>
+				<flux.access.appkey>e9hj348df92wj34</flux.access.appkey>
+				<flux.access.appsecret>9is23wq12i9ud65xn2w6u87y</flux.access.appsecret>
+				<mysql.url>127.0.0.1:3306/xuetang</mysql.url>
+				<mysql.username>root</mysql.username>
+				<mysql.password>mysql</mysql.password>
+
+				<db.xuetang.url>jdbc:mysql://127.0.0.1:3306/xuetang</db.xuetang.url>
+				<db.xuetang.username>root</db.xuetang.username>
+				<db.xuetang.password>mysql</db.xuetang.password>
+
+				<deploy.environment>prod</deploy.environment>
+				<sms.url>http://127.0.0.1:8082/sms/sms</sms.url>
+			</properties>
+		</profile> -->
+	</profiles>
+	
+		
+</project>
