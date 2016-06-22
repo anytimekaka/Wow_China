@@ -1,4 +1,4 @@
-package com.link.controller;
+package com.wowchina.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.link.model.CommonResponse;
+import com.wowchina.model.CommonResponse;
 
 @Controller
 public class DemoController {

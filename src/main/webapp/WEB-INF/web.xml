@@ -27,7 +27,7 @@
   	</filter>
 	<filter>
 	     <filter-name>DemoFilter</filter-name>
-	     <filter-class>com.link.filter.DemoFilter</filter-class>
+	     <filter-class>com.wowchina.filter.DemoFilter</filter-class>
 	</filter>
 	
 	<!-- ============================= filter mapping============================= -->

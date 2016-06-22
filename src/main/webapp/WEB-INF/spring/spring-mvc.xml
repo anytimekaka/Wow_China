@@ -81,7 +81,7 @@
 	</bean>
 
 	<context:annotation-config />
-	<context:component-scan base-package="com.link.controller" />
-	<context:component-scan base-package="com.link.service" />
-	<context:component-scan base-package="com.link.dao" />
+	<context:component-scan base-package="com.wowchina.controller" />
+	<context:component-scan base-package="com.wowchina.service" />
+	<context:component-scan base-package="com.wowchina.dao" />
 </beans>
