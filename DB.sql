@@ -1,3 +1,4 @@
+DROP  TABLE IF EXISTS `intern`.`user_basic`;
 CREATE TABLE IF NOT EXISTS `intern`.`user_basic` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '用户主键id',
   `username` VARCHAR(45) NULL COMMENT '用户名',
@@ -13,11 +14,16 @@ CREATE TABLE IF NOT EXISTS `intern`.`user_basic` (
   `email` VARCHAR(45) NULL COMMENT 'email',
   `tel` VARCHAR(45) NULL COMMENT '手机号码',
   `certificates` VARCHAR(100) NULL COMMENT '证书',
-  `linkedin` VARCHAR(45) NULL COMMENT 'LinkedIn账号',
+  `linkedinid` VARCHAR(45) NULL COMMENT 'LinkedIn id',
+  `linkedinusername` VARCHAR(45) NULL COMMENT 'LinkedIn username',
+  `linkedinprofileurl` VARCHAR(100) NULL COMMENT 'LinkedIn profile url',
   `facebook` VARCHAR(45) NULL COMMENT 'FaceBook账号',
   PRIMARY KEY (`id`)  COMMENT '')
 ENGINE = InnoDB COMMENT '注册用户表';
 
+/* SELECT count(*) FROM `intern`.`user_basic` WHERE username='anytimekaka' AND password='123456'; */
+
+DROP  TABLE IF EXISTS `intern`.`post`;
 CREATE TABLE IF NOT EXISTS `intern`.`post` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT 'Id主键',
   `title` VARCHAR(100) NULL COMMENT '标题',
@@ -39,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `intern`.`post` (
   PRIMARY KEY (`id`)  COMMENT '')
   ENGINE = InnoDB COMMENT '发布的信息';
 
+DROP  TABLE IF EXISTS `intern`.`apply`;
 CREATE TABLE IF NOT EXISTS `intern`.`apply` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `userid` INT NULL COMMENT '申请者Id',
@@ -48,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `intern`.`apply` (
   PRIMARY KEY (`id`)  COMMENT '')
   ENGINE = InnoDB COMMENT '申请记录表';
 
+DROP  TABLE IF EXISTS `intern`.`collection`;
 CREATE TABLE IF NOT EXISTS `intern`.`collection`(
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '用户收藏',
   `userid` INT NULL COMMENT '用户id',
@@ -58,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `intern`.`collection`(
   KEY (`postid`) COMMENT '')
   ENGINE = InnoDB COMMENT '用户收藏';
 
+DROP  TABLE IF EXISTS `intern`.`message`;
 CREATE TABLE IF NOT EXISTS `intern`.`message`(
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `userid` INT NULL COMMENT '用户id',
@@ -70,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `intern`.`message`(
   KEY (`postid`) COMMENT '')
   ENGINE = InnoDB COMMENT '系统消息';
 
+DROP  TABLE IF EXISTS `intern`.`city`;
 CREATE TABLE IF NOT EXISTS `intern`.`city` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '城市id',
   `cityname` VARCHAR(45) NULL COMMENT '城市名',
@@ -77,12 +87,14 @@ CREATE TABLE IF NOT EXISTS `intern`.`city` (
   PRIMARY KEY (`id`) COMMENT '主键')
   ENGINE = InnoDB COMMENT '城市表';
 
+DROP  TABLE IF EXISTS `intern`.`major`;
 CREATE TABLE IF NOT EXISTS `intern`.`major` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `major` VARCHAR(45) NULL COMMENT '专业名',
   PRIMARY KEY (`id`) COMMENT '主键')
   ENGINE = InnoDB COMMENT '专业';
 
+DROP  TABLE IF EXISTS `intern`.`industry`;
 CREATE TABLE IF NOT EXISTS `intern`.`industry` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '自增id',
   `major` VARCHAR(45) NULL COMMENT '行业和兴趣名',

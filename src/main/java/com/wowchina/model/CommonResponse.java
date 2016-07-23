@@ -1,20 +1,34 @@
 package com.wowchina.model;
 
-public class CommonResponse {
+import lombok.Data;
 
-	private String status;
-	private String message;
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	
+import java.io.Serializable;
+
+@Data
+public class CommonResponse<T> implements Serializable{
+
+    /**
+     * 0：成功，1：失败
+     */
+    private int code;
+
+    /**
+     * 返回消息
+     */
+    private String message;
+
+    /**
+     * 返回内容
+     */
+    private T result;
+
+    public CommonResponse(int code, String message){
+        this.code = code;
+        this.message = message;
+    }
+
+    public CommonResponse(){
+        this.code=0;
+        this.message="success";
+    }
 }

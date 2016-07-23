@@ -1,27 +1,32 @@
 package com.wowchina.domain;
 
-public class User {
+import lombok.Data;
+import org.apache.ibatis.type.Alias;
 
-	private int id;
-	private String name;
-	private int age;
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
+import java.io.Serializable;
+
+
+@Alias("user")
+@Data
+public class User implements Serializable{
+
+    private int id;  //用户主键id
+    private String username;   //用户名 
+    private String password;   //密码 
+    private String token;   //用户验证token 
+    private String userimage;   //用户头像图片名称，默认为系统自带图片，上传后用用户名重命名，沿用之前后缀 
+    private String realname;   //用户真实姓名 
+    private String university;   //学校 
+    private String majorid;   //所学专业id（仅此一个） 
+    private String industryids;   //工作行业（多选，以『,』分割） 
+    private String skills;   //特长技能描述 
+    private String location;   //当前所在地 
+    private String email;   //email 
+    private String tel;   //手机号码 
+    private String certificates;   //证书 
+    private String linkedinid;   //LinkedIn id 
+    private String linkedinusername;   //LinkedIn username 
+    private String linkedinprofileurl;   //LinkedIn profile url 
+    private String facebook;   //FaceBook账号
+
 }
