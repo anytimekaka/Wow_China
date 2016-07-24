@@ -31,4 +31,20 @@ public class CommonResponse<T> implements Serializable{
         this.code=0;
         this.message="success";
     }
+
+    public static CommonResponse successResponse(String message){
+        return new CommonResponse(0, message);
+    }
+
+    public static CommonResponse successResponse(){
+        return new CommonResponse(0, "success");
+    }
+
+    public  static CommonResponse errorResponse(String message){
+        return new CommonResponse(1, message);
+    }
+
+    public static CommonResponse authErrorResponse(){
+        return CommonResponse.errorResponse("auth error");
+    }
 }

@@ -25,20 +25,28 @@
         	<param-value>UTF-8</param-value>  
     	</init-param>  
   	</filter>
-	<filter>
-	     <filter-name>DemoFilter</filter-name>
-	     <filter-class>com.wowchina.filter.DemoFilter</filter-class>
-	</filter>
+	<!--<filter>-->
+	     <!--<filter-name>DemoFilter</filter-name>-->
+	     <!--<filter-class>com.wowchina.filter.DemoFilter</filter-class>-->
+	<!--</filter>-->
+    <!--<filter>-->
+        <!--<filter-name>AuthFilter</filter-name>-->
+        <!--<filter-class>com.wowchina.filter.AuthFilter</filter-class>-->
+    <!--</filter>-->
 	
 	<!-- ============================= filter mapping============================= -->
 	<filter-mapping>  
     	<filter-name>encodingFilter</filter-name>  
     	<url-pattern>/*</url-pattern>  
-  	</filter-mapping>  
-  	<filter-mapping>
-	     <filter-name>DemoFilter</filter-name>
-	     <url-pattern>/demo.action</url-pattern>
-	</filter-mapping>
+  	</filter-mapping>
+    <!--<filter-mapping>-->
+        <!--<filter-name>DemoFilter</filter-name>-->
+        <!--<url-pattern>/demo.action</url-pattern>-->
+    <!--</filter-mapping>-->
+  	<!--<filter-mapping>-->
+	     <!--<filter-name>AuthFilter</filter-name>-->
+	     <!--<url-pattern>/edit/*.action</url-pattern>-->
+	<!--</filter-mapping>-->
 	
 	<!-- ============================= listener ============================= -->
 	<listener>  

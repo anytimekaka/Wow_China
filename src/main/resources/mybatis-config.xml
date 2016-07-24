@@ -23,5 +23,7 @@
 
   <mappers>
     <mapper resource="sqlmap/UserMapper.xml"/>
+    <mapper resource="sqlmap/IndustryMapper.xml"/>
+    <mapper resource="sqlmap/MajorMapper.xml"/>
   </mappers>
 </configuration>

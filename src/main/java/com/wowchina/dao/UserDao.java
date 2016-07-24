@@ -16,6 +16,40 @@ public class UserDao {
     @Autowired
     private SessionService sessionService;
 
+    public User queryUserInfoByToken(String token){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.UserMapper.queryUserInfoByToken";
+        User resultUser = session.selectOne(statement, token);
+        session.close();
+        return resultUser;
+    }
+
+    public User queryUserInfoByUserId(int userId){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.UserMapper.queryUserInfoByUserId";
+        User resultUser = session.selectOne(statement, userId);
+        session.close();
+        return resultUser;
+    }
+
+    public int updateUserInfo(User user){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.UserMapper.updateUserInfo";
+        int count = session.update(statement, user);
+        session.commit();
+        session.close();
+        return count;
+    }
+
+    public int updateUserImageInfo(User user){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.UserMapper.updateUserImageInfo";
+        int count = session.update(statement, user);
+        session.commit();
+        session.close();
+        return count;
+    }
+
     /**
      * 登录dao
      * @param user

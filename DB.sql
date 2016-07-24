@@ -97,6 +97,17 @@ CREATE TABLE IF NOT EXISTS `intern`.`major` (
 DROP  TABLE IF EXISTS `intern`.`industry`;
 CREATE TABLE IF NOT EXISTS `intern`.`industry` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '自增id',
-  `major` VARCHAR(45) NULL COMMENT '行业和兴趣名',
+  `industry` VARCHAR(45) NULL COMMENT '行业和兴趣名',
   PRIMARY KEY (`id`) COMMENT '主键')
   ENGINE = InnoDB COMMENT '行业和兴趣';
+
+INSERT INTO `industry` (`industry`) VALUES ('Administration and office support');
+INSERT INTO `industry` (`industry`) VALUES ('Advertising');
+INSERT INTO `industry` (`industry`) VALUES ('Arts');
+INSERT INTO `industry` (`industry`) VALUES ('Media');
+INSERT INTO `industry` (`industry`) VALUES ('Administration and office support');NSERT INTO `industry` (`industry`) VALUES ('Administration and office support');
+INSERT INTO `industry` (`industry`) VALUES ('Administration and office support');
+INSERT INTO `industry` (`industry`) VALUES ('Administration and office support');
+
+INSERT INTO `major` (`major`) VALUES ('Business Administration');
+INSERT INTO `major` (`major`) VALUES ('Impressionist Art');
