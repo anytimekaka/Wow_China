@@ -105,9 +105,6 @@ INSERT INTO `industry` (`industry`) VALUES ('Administration and office support')
 INSERT INTO `industry` (`industry`) VALUES ('Advertising');
 INSERT INTO `industry` (`industry`) VALUES ('Arts');
 INSERT INTO `industry` (`industry`) VALUES ('Media');
-INSERT INTO `industry` (`industry`) VALUES ('Administration and office support');NSERT INTO `industry` (`industry`) VALUES ('Administration and office support');
-INSERT INTO `industry` (`industry`) VALUES ('Administration and office support');
-INSERT INTO `industry` (`industry`) VALUES ('Administration and office support');
 
 INSERT INTO `major` (`major`) VALUES ('Business Administration');
 INSERT INTO `major` (`major`) VALUES ('Impressionist Art');

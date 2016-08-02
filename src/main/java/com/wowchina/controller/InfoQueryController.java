@@ -31,4 +31,10 @@ public class InfoQueryController {
         return this.infoQueryService.queryAllIndustry();
     }
 
+    @RequestMapping(value = "/getPostInfoById.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse getPostInfoById(HttpServletRequest request,
+                                                          @RequestParam int id,
+                                                          Model model){
+        return this.infoQueryService.getPostInfoById(id);
+    }
 }

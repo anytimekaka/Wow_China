@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wowchina.domain.PostMapper">
+
+    <sql id="tableName">post</sql>
+    <sql id="allFields">id,title,company,website,industryid,opento,headcount,eligible,status,cityid,address,reward,description,updatetime,userid</sql>
+    <sql id="noIdFields">title,company,website,industryid,opento,headcount,eligible,status,cityid,address,reward,description,updatetime,userid</sql>
+
+    <select id="getPostInfoById" resultType="post" parameterType="int">
+        select
+        <include refid="allFields"/>
+        from
+        <include refid="tableName"/>
+        where id = #{id}
+    </select>
+
+    <insert id="addPost" parameterType="post">
+        INSERT INTO <include refid="tableName"/> (<include refid="noIdFields"/>) VALUES
+        (#{title},#{company},#{website},#{industryid},#[opento},#{headcount},#{eligible},#{status},#{cityid},#{address},#{reward},#{description},#{updatetime},#{userid})
+    </insert>
+
+</mapper>
