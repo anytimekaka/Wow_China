@@ -4,6 +4,7 @@ import com.wowchina.domain.User;
 import com.wowchina.domain.UserInfo;
 import com.wowchina.model.CommonResponse;
 import com.wowchina.model.EditUserInfoRequest;
+import com.wowchina.service.PostService;
 import com.wowchina.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,10 +22,10 @@ public class UserController {
 
 	@Value("${uploadFile.dir}")
 	private String uploadFilDir;
-
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private PostService postService;
     @Autowired
     private HttpServletRequest request;
 
@@ -49,18 +50,29 @@ public class UserController {
     }
 
     @RequestMapping(value = "/viewUserInfo.action", method = RequestMethod.GET)
-    public @ResponseBody CommonResponse<UserInfo> viewUserInfo(@RequestParam int userId,
-                                                               Model model){
+    public @ResponseBody CommonResponse<UserInfo> viewUserInfo(@RequestParam int userId){
         return this.userService.queryUserInfoByUserId(userId);
     }
 
     @RequestMapping(value = "/editUserInfo.action", method = RequestMethod.POST)
-    public @ResponseBody CommonResponse editUserInfo(@RequestBody EditUserInfoRequest resq,
-                                                     Model model){
+    public @ResponseBody CommonResponse editUserInfo(@RequestBody EditUserInfoRequest resq){
         if(!this.userService.checkUser(resq.getUserId(), resq.getToken())){
             return CommonResponse.authErrorResponse();
         }
         return this.userService.updateUserInfo(resq);
+    }
+
+    @RequestMapping(value = "/addPost.action", method = RequestMethod.POST)
+    public @ResponseBody CommonResponse addPost(@RequestBody EditUserInfoRequest resq){
+        if(!this.userService.checkUser(resq.getUserId(), resq.getToken())){
+            return CommonResponse.authErrorResponse();
+        }
+        return this.userService.updateUserInfo(resq);
+    }
+
+    @RequestMapping(value = "/getPostById.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse getPostInfoById(@RequestParam int id){
+        return this.postService.getPostInfoById(id);
     }
 
     @RequestMapping(value = "/uploadUserImage.action", method = RequestMethod.POST)

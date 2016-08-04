@@ -16,7 +16,7 @@
         where id = #{id}
     </select>
 
-    <insert id="addPost" parameterType="post">
+    <insert id="addPost" parameterType="post" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO <include refid="tableName"/> (<include refid="noIdFields"/>) VALUES
         (#{title},#{company},#{website},#{industryid},#[opento},#{headcount},#{eligible},#{status},#{cityid},#{address},#{reward},#{description},#{updatetime},#{userid})
     </insert>

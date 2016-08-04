@@ -1,16 +1,16 @@
-package com.wowchina.domain;
+package com.wowchina.model;
 
 import lombok.Data;
-import org.apache.ibatis.type.Alias;
 
-import java.io.Serializable;
-
-
-@Alias("post")
+/**
+ * Created by wangguisheng on 16/6/24.
+ */
 @Data
-public class Post implements Serializable{
+public class AddPostRequest {
 
-    private int id; //Id主键,
+    private int userId;
+    private String token;
+
     private String title;   // 标题
     private String company; // 公司
     private String website; // 公司网站

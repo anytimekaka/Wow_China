@@ -24,15 +24,15 @@ public class PostDao {
         return post;
     }
 
-    public boolean addPost(Post post){
+    public int addPost(Post post){
         SqlSession session = this.sessionService.getSession();
         String statement = "com.wowchina.domain.PostMapper.addPost";
-        int count = session.insert(statement, post);
+        int id = session.insert(statement, post);
         session.commit();
         session.close();
-        if(1 == count){
-            return true;
+        if(1 <= id){
+            return id;
         }
-        return false;
+        return 0;
     }
 }

@@ -18,23 +18,18 @@ public class InfoQueryController {
 
     @Autowired
     private InfoQueryService infoQueryService;
+    @Autowired
+    private HttpServletRequest request;
 
 	@RequestMapping(value = "/queryMajor.action", method = RequestMethod.GET)
-	public @ResponseBody  CommonResponse queryMajor(HttpServletRequest request,
-                                               Model model) {
+	public @ResponseBody  CommonResponse queryMajor() {
         return this.infoQueryService.queryAllMajor();
 	}
 
     @RequestMapping(value = "/queryIndustry.action", method = RequestMethod.GET)
-    public @ResponseBody  CommonResponse queryAllIndustry(HttpServletRequest request,
-                                               Model model){
+    public @ResponseBody  CommonResponse queryAllIndustry(){
         return this.infoQueryService.queryAllIndustry();
     }
 
-    @RequestMapping(value = "/getPostInfoById.action", method = RequestMethod.GET)
-    public @ResponseBody  CommonResponse getPostInfoById(HttpServletRequest request,
-                                                          @RequestParam int id,
-                                                          Model model){
-        return this.infoQueryService.getPostInfoById(id);
-    }
+
 }
