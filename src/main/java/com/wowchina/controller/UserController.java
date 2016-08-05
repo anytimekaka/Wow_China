@@ -2,6 +2,7 @@ package com.wowchina.controller;
 
 import com.wowchina.domain.User;
 import com.wowchina.domain.UserInfo;
+import com.wowchina.model.AddPostRequest;
 import com.wowchina.model.CommonResponse;
 import com.wowchina.model.EditUserInfoRequest;
 import com.wowchina.service.PostService;
@@ -63,11 +64,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addPost.action", method = RequestMethod.POST)
-    public @ResponseBody CommonResponse addPost(@RequestBody EditUserInfoRequest resq){
-        if(!this.userService.checkUser(resq.getUserId(), resq.getToken())){
+    public @ResponseBody CommonResponse addPost(@RequestBody AddPostRequest req){
+        if(!this.userService.checkUser(req.getUserId(), req.getToken())){
             return CommonResponse.authErrorResponse();
         }
-        return this.userService.updateUserInfo(resq);
+        return this.postService.addPost(req);
     }
 
     @RequestMapping(value = "/getPostById.action", method = RequestMethod.GET)

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +26,15 @@ public class MajorDao {
         Major major = session.selectOne(statement, majorId);
         session.close();
         return major;
+    }
+
+    public List<Major> queryMajorsByIds(String ids){
+        List<Major> majors = new ArrayList<Major>();
+        String[] idArray = ids.split(",");
+        for(String id : idArray){
+            majors.add(queryMajorById(Integer.parseInt(id)));
+        }
+        return majors;
     }
 
     public List<Major> queryAllMajor(){
