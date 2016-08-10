@@ -28,5 +28,8 @@ public class InfoQueryController {
         return this.infoQueryService.queryAllIndustry();
     }
 
-
+    @RequestMapping(value = "/queryCity.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse queryAllCtiy(){
+        return this.infoQueryService.queryAllCity();
+    }
 }

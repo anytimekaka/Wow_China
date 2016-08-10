@@ -111,3 +111,7 @@ INSERT INTO `industry` (`industry`) VALUES ('Media');
 
 INSERT INTO `major` (`major`) VALUES ('Business Administration');
 INSERT INTO `major` (`major`) VALUES ('Impressionist Art');
+
+INSERT INTO `city` (`cityname`) VALUES ('shanghai');
+INSERT INTO `city` (`cityname`) VALUES ('beijing');
+INSERT INTO `city` (`cityname`) VALUES ('Hongkong');

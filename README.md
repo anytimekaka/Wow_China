@@ -1,5 +1,32 @@
 # Wow_China
 
+### 获取所有城市列表信息
+
+* url:http://112.124.121.126:8080/queryCity.action
+* 请求方式：GET
+* 返回参数：
+
+```json
+{
+    "code": 0,
+    "message": "success",
+    "result": [
+        {
+            "id": 1,
+            "cityname": "shanghai"
+        },
+        {
+            "id": 2,
+            "cityname": "beijing"
+        },
+        {
+            "id": 3, 
+            "cityname": "Hongkong"
+        }
+    ]
+}
+```
+
 ### 添加Post接口
 
 * url：http://112.124.121.126:8080/addPost.action

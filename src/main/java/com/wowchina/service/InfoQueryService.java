@@ -1,7 +1,9 @@
 package com.wowchina.service;
 
+import com.wowchina.dao.CityDao;
 import com.wowchina.dao.IndustryDao;
 import com.wowchina.dao.MajorDao;
+import com.wowchina.domain.City;
 import com.wowchina.domain.Industry;
 import com.wowchina.domain.Major;
 import com.wowchina.model.CommonResponse;
@@ -20,6 +22,19 @@ public class InfoQueryService {
     private IndustryDao industryDao;
     @Autowired
     private MajorDao majorDao;
+    @Autowired
+    private CityDao cityDao;
+
+    /**
+     * 查询所有City信息
+     * @return
+     */
+    public CommonResponse<List<City>> queryAllCity(){
+        List<City> citys = this.cityDao.queryAllCity();
+        CommonResponse<List<City>> commonResponse = CommonResponse.successResponse();
+        commonResponse.setResult(citys);
+        return commonResponse;
+    }
 
     /**
      * 查询所有Major信息
