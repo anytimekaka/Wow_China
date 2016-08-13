@@ -30,6 +30,13 @@ public class UserController {
     @Autowired
     private HttpServletRequest request;
 
+    /**
+     * 用户登录
+     * @param username
+     * @param password
+     * @param model
+     * @return
+     */
 	@RequestMapping(value = "/login.action", method = RequestMethod.GET)
 	public @ResponseBody  CommonResponse login(@RequestParam String username,
                                                @RequestParam String password,
@@ -40,6 +47,13 @@ public class UserController {
         return this.userService.login(user);
 	}
 
+    /**
+     * 用户注册
+     * @param username
+     * @param password
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/register.action", method = RequestMethod.GET)
     public @ResponseBody  CommonResponse register(@RequestParam String username,
                                                   @RequestParam String password,
@@ -50,11 +64,21 @@ public class UserController {
         return this.userService.register(user);
     }
 
+    /**
+     * 根据ID，预览用户信息
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/viewUserInfo.action", method = RequestMethod.GET)
     public @ResponseBody CommonResponse<UserInfo> viewUserInfo(@RequestParam int userId){
         return this.userService.queryUserInfoByUserId(userId);
     }
 
+    /**
+     * 用户编辑信息
+     * @param resq
+     * @return
+     */
     @RequestMapping(value = "/editUserInfo.action", method = RequestMethod.POST)
     public @ResponseBody CommonResponse editUserInfo(@RequestBody EditUserInfoRequest resq){
         if(!this.userService.checkUser(resq.getUserId(), resq.getToken())){
@@ -63,6 +87,11 @@ public class UserController {
         return this.userService.updateUserInfo(resq);
     }
 
+    /**
+     * 添加Post
+     * @param req
+     * @return
+     */
     @RequestMapping(value = "/addPost.action", method = RequestMethod.POST)
     public @ResponseBody CommonResponse addPost(@RequestBody AddPostRequest req){
         if(!this.userService.checkUser(req.getUserId(), req.getToken())){
@@ -71,11 +100,36 @@ public class UserController {
         return this.postService.addPost(req);
     }
 
+    /**
+     * 更新Post信息
+     * @param req
+     * @return
+     */
+    @RequestMapping(value = "/updatePost.action", method = RequestMethod.POST)
+    public @ResponseBody CommonResponse updatePost(@RequestBody AddPostRequest req){
+        if(!this.userService.checkUser(req.getUserId(), req.getToken())){
+            return CommonResponse.authErrorResponse();
+        }
+        return this.postService.updatePost(req);
+    }
+
+    /**
+     * 根据postID，获取post详细信息
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/getPostById.action", method = RequestMethod.GET)
     public @ResponseBody  CommonResponse getPostInfoById(@RequestParam int id){
         return this.postService.getPostInfoById(id);
     }
 
+    /**
+     * 用户上传图片
+     * @param file
+     * @param userId
+     * @param token
+     * @return
+     */
     @RequestMapping(value = "/uploadUserImage.action", method = RequestMethod.POST)
     public @ResponseBody CommonResponse fileUpload(@RequestParam("file") MultipartFile file,
                                                    @RequestParam("userId") int userId,
@@ -90,7 +144,8 @@ public class UserController {
             try {
                 String originalFilename = file.getOriginalFilename();
                 String fileType = originalFilename.substring(originalFilename.lastIndexOf("."));
-                String filePath = this.uploadFilDir + fileDBName + fileType;
+                fileDBName = fileDBName + fileType;
+                String filePath = this.uploadFilDir + fileDBName;
                 file.transferTo(new File(filePath));
             } catch (Exception e) {
                 e.printStackTrace();

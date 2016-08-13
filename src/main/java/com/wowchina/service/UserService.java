@@ -3,10 +3,7 @@ package com.wowchina.service;
 import com.wowchina.dao.IndustryDao;
 import com.wowchina.dao.MajorDao;
 import com.wowchina.dao.UserDao;
-import com.wowchina.domain.Industry;
-import com.wowchina.domain.Major;
-import com.wowchina.domain.User;
-import com.wowchina.domain.UserInfo;
+import com.wowchina.domain.*;
 import com.wowchina.model.CommonResponse;
 import com.wowchina.model.EditUserInfoRequest;
 import com.wowchina.model.LoginResponse;
@@ -40,6 +37,7 @@ public class UserService {
         User user = this.userDao.queryUserInfoByUserId(userId);
         return null != user && user.getToken().equals(token);
     }
+
     /**
      * 根据UserId查询用户基本信息
      * @param userId
@@ -146,14 +144,11 @@ public class UserService {
         String token = Parse2MD5.parseStrToMd5L32(user.getUsername() + user.getPassword());
         user.setPassword(passwordmd5);
         user.setToken(token);
-        if(this.userDao.addUser(user)){
-            response.setMessage("register success");
-            response.setResult(token);
-            return response;
-        }else{
-            response.setCode(1);
-            response.setMessage("register error");
-        }
+        int userId = this.userDao.addUser(user);
+        UserRegisterInfo userRegisterInfo = new UserRegisterInfo();
+        userRegisterInfo.setUserId(userId);
+        userRegisterInfo.setToken(token);
+        response.setResult(userRegisterInfo);
         return response;
     }
 }

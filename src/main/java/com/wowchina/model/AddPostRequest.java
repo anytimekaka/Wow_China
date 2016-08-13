@@ -11,6 +11,7 @@ public class AddPostRequest {
     private int userId;
     private String token;
 
+    private int id;         // id
     private String title;   // 标题
     private String company; // 公司
     private String website; // 公司网站
@@ -18,7 +19,6 @@ public class AddPostRequest {
     private String opento;  // 面向专业
     private int headcount;  // 预计人数
     private int eligible;   // 已确定人数，不能大于预计需要人数
-    private int status;     // 状态：0-进行中，1-已关闭
     private int cityid;     // 所在城市
     private String address; // 详细地址
     private String reward;  // 薪水与报酬

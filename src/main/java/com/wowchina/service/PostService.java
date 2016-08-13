@@ -4,10 +4,7 @@ import com.wowchina.dao.IndustryDao;
 import com.wowchina.dao.MajorDao;
 import com.wowchina.dao.PostDao;
 import com.wowchina.dao.UserDao;
-import com.wowchina.domain.Industry;
-import com.wowchina.domain.Major;
-import com.wowchina.domain.Post;
-import com.wowchina.domain.User;
+import com.wowchina.domain.*;
 import com.wowchina.model.AddPostRequest;
 import com.wowchina.model.CommonResponse;
 import com.wowchina.model.GetPostInfoResponse;
@@ -40,11 +37,11 @@ public class PostService {
      */
     public CommonResponse<GetPostInfoResponse> getPostInfoById(int id){
         Post post = postDao.getPostInfoById(id);
-        User user = new User();
+        UserBaseInfo user = new UserBaseInfo();
         List<Major> majors = new ArrayList<Major>();
         List<Industry> industrys = new ArrayList<Industry>();
         if(null != post){
-            userDao.queryUserInfoByUserId(post.getUserid());
+            user = userDao.queryUserBaseInfoByUserId(post.getUserid());
             industrys = industryDao.queryIndustrysByIds(String.valueOf(post.getIndustryid()).split(","));
             majors = majorDao.queryMajorsByIds(post.getOpento());
         }
@@ -65,6 +62,15 @@ public class PostService {
         int postId = postDao.addPost(post);
         CommonResponse commonResponse = CommonResponse.successResponse();
         commonResponse.setResult(postId);
+        return commonResponse;
+    }
+
+    public CommonResponse<String> updatePost(AddPostRequest request){
+        Post post = new Post();
+        BeanUtils.copyProperties(request, post);
+        post.setUserid(request.getUserId());
+        postDao.updatePost(post);
+        CommonResponse commonResponse = CommonResponse.successResponse();
         return commonResponse;
     }
 

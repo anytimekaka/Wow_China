@@ -4,6 +4,7 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 @Alias("post")
@@ -23,6 +24,6 @@ public class Post implements Serializable{
     private String address; // 详细地址
     private String reward;  // 薪水与报酬
     private String description; // 职责描述
-    private String updatetime;  // 更新时间
     private int userid;         // 发布者ID
+    private Date updatetime;  // 更新时间
 }

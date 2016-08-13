@@ -29,7 +29,6 @@ public class PostDao {
     }
 
     public int addPost(Post post){
-        post.setUpdatetime(TimeUtils.getCurrentTime());
         SqlSession session = this.sessionService.getSession();
         String statement = "com.wowchina.domain.PostMapper.addPost";
         session.insert(statement, post);
@@ -40,5 +39,14 @@ public class PostDao {
             return id;
         }
         return 0;
+    }
+
+    public int updatePost(Post post){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.PostMapper.updatePost";
+        int affectRow = session.update(statement, post);
+        session.commit();
+        session.close();
+        return affectRow;
     }
 }

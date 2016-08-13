@@ -1,6 +1,7 @@
 package com.wowchina.dao;
 
 import com.wowchina.domain.User;
+import com.wowchina.domain.UserBaseInfo;
 import com.wowchina.service.SessionService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,14 @@ public class UserDao {
         User resultUser = session.selectOne(statement, token);
         session.close();
         return resultUser;
+    }
+
+    public UserBaseInfo queryUserBaseInfoByUserId(int userId){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.UserMapper.queryUserBaseInfoByUserId";
+        UserBaseInfo userBaseInfo = session.selectOne(statement, userId);
+        session.close();
+        return userBaseInfo;
     }
 
     public User queryUserInfoByUserId(int userId){
@@ -82,17 +91,18 @@ public class UserDao {
     /**
      * 添加用户
      * @param user
-     * @return true：添加成功
+     * @return userID
      */
-    public boolean addUser(User user){
+    public int addUser(User user){
         SqlSession session = this.sessionService.getSession();
         String statement = "com.wowchina.domain.UserMapper.addUser";
-        int count = session.insert(statement, user);
+        session.insert(statement, user);
+        int id = user.getId();
         session.commit();
         session.close();
-        if(1 == count){
-            return true;
+        if(1<=id){
+            return id;
         }
-        return false;
+        return 0;
     }
 }

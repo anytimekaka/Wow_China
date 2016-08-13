@@ -9,9 +9,15 @@
          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
          http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                <property name="objectMapper" ref="customObjectMapper"></property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
-	<mvc:view-controller path="/" view-name="index" />
+    <bean id="customObjectMapper" class="com.wowchina.common.CustomObjectMapper"/>
 
 <!-- 	<bean -->
 <!-- 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
@@ -53,33 +59,6 @@
 		<property name="fileEncoding" value="utf-8" />
 	</bean>
 	
-	<!-- ======================= HttpClient:RestTemplate ======================= -->
-    <bean id="ky.requestFactory" class="org.springframework.http.client.SimpleClientHttpRequestFactory">
-        <property name="readTimeout" value="10000"/>
-        <property name="connectTimeout" value="3000"/>
-    </bean>
-
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
-        <constructor-arg ref="ky.requestFactory"/>
-    </bean>
-	
-	<!-- ======================= DataSource ======================= -->
-	
-	<bean id="xuetangDatasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName">
-			<value>${db.xuetang.driverClassName}</value>
-		</property>
-		<property name="url">
-			<value>${db.xuetang.url}</value>
-		</property>
-		<property name="username">
-			<value>${db.xuetang.username}</value>
-		</property>
-		<property name="password">
-			<value>${db.xuetang.password}</value>
-		</property>
-	</bean>
-
 	<context:annotation-config />
 	<context:component-scan base-package="com.wowchina.controller" />
 	<context:component-scan base-package="com.wowchina.service" />

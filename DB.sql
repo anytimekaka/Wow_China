@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `intern`.`post` (
   `userimage` VARCHAR(45) NULL COMMENT '发布者头像图片',
   PRIMARY KEY (`id`)  COMMENT '')
   ENGINE = InnoDB COMMENT '发布的信息';
-ALTER TABLE `intern`.`post` MODIFY `updatetime` VARCHAR(45) NULL COMMENT '更新时间';
+ALTER TABLE `intern`.`post` MODIFY `updatetime` DATETIME NULL COMMENT '更新时间';
 ALTER TABLE `intern`.`post` DROP `username`;
 ALTER TABLE `intern`.`post` DROP `userimage`;
 

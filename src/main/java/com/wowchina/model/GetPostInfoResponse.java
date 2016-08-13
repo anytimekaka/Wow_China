@@ -3,7 +3,7 @@ package com.wowchina.model;
 import com.wowchina.domain.Industry;
 import com.wowchina.domain.Major;
 import com.wowchina.domain.Post;
-import com.wowchina.domain.User;
+import com.wowchina.domain.UserBaseInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 public class GetPostInfoResponse {
 
-    private User user;
+    private UserBaseInfo user;
     private Post post;
     private Industry industry;
     private List<Major> openToMajors;

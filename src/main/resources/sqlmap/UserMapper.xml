@@ -7,6 +7,7 @@
     <sql id="tableName">user_basic</sql>
     <sql id="allFields">id,username,password,token,userimage,realname,university,majorid,industryids,skills,location,email,tel,certificates,linkedinid,linkedinusername,linkedinprofileurl,facebook</sql>
     <sql id="registerFields">username,password,token</sql>
+    <sql id="baseFields">id,username,userimage</sql>
 
     <select id="queryUserInfoByToken" resultType="user" parameterType="String">
         select
@@ -14,6 +15,14 @@
         from
         <include refid="tableName"/>
         where token = #{token}
+    </select>
+
+    <select id="queryUserBaseInfoByUserId" resultType="userBaseInfo" parameterType="int">
+        select
+        <include refid="baseFields"/>
+        from
+        <include refid="tableName"/>
+        where id = #{userId}
     </select>
 
     <select id="queryUserInfoByUserId" resultType="user" parameterType="int">
@@ -64,7 +73,7 @@
         select count(*) from <include refid="tableName"/> where username = #{username}
     </select>
 
-    <insert id="addUser" parameterType="user">
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id" parameterType="user">
         INSERT INTO <include refid="tableName"/> (<include refid="registerFields"/>) VALUES
         (#{username}, #{password}, #{token})
     </insert>
