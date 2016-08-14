@@ -1,10 +1,12 @@
 package com.wowchina.controller;
 
+import com.wowchina.domain.PostItem;
 import com.wowchina.domain.User;
 import com.wowchina.domain.UserInfo;
 import com.wowchina.model.AddPostRequest;
 import com.wowchina.model.CommonResponse;
 import com.wowchina.model.EditUserInfoRequest;
+import com.wowchina.model.PostListRequest;
 import com.wowchina.service.PostService;
 import com.wowchina.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +19,35 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class UserController {
 
 	@Value("${uploadFile.dir}")
-	private String uploadFilDir;
+	private String uploadFileDir;
     @Autowired
     private UserService userService;
     @Autowired
     private PostService postService;
     @Autowired
     private HttpServletRequest request;
+
+
+    @RequestMapping(value = "/postlist.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse login(@RequestParam int industryId,
+                                               @RequestParam int currentPage,
+                                               @RequestParam int pageSize,
+                                               Model model) {
+        PostListRequest postListRequest = new PostListRequest();
+        postListRequest.setIndustryId(industryId);
+        postListRequest.setCurrentPage(currentPage);
+        postListRequest.setPageSize(pageSize);
+        List<PostItem> list = this.userService.getPostsByIndustryId(postListRequest);
+        CommonResponse response = CommonResponse.successResponse();
+        response.setResult(list);
+        return response;
+    }
 
     /**
      * 用户登录
@@ -124,7 +143,7 @@ public class UserController {
     }
 
     /**
-     * 用户上传图片
+     * 用户上传头像图片
      * @param file
      * @param userId
      * @param token
@@ -145,7 +164,7 @@ public class UserController {
                 String originalFilename = file.getOriginalFilename();
                 String fileType = originalFilename.substring(originalFilename.lastIndexOf("."));
                 fileDBName = fileDBName + fileType;
-                String filePath = this.uploadFilDir + fileDBName;
+                String filePath = this.uploadFileDir + fileDBName;
                 file.transferTo(new File(filePath));
             } catch (Exception e) {
                 e.printStackTrace();

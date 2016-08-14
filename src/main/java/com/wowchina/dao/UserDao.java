@@ -1,11 +1,15 @@
 package com.wowchina.dao;
 
+import com.wowchina.domain.PostItem;
+import com.wowchina.domain.PostListParam;
 import com.wowchina.domain.User;
 import com.wowchina.domain.UserBaseInfo;
 import com.wowchina.service.SessionService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by wangguisheng on 16/6/20.
@@ -16,6 +20,14 @@ public class UserDao {
 
     @Autowired
     private SessionService sessionService;
+
+    public List<PostItem> queryPostsByIndustryId(PostListParam postListParam){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.UserMapper.queryPostsByIndustryId";
+        List<PostItem> postItems = session.selectList(statement, postListParam);
+        session.close();
+        return postItems;
+    }
 
     public User queryUserInfoByToken(String token){
         SqlSession session = this.sessionService.getSession();

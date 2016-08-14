@@ -9,6 +9,15 @@
     <sql id="registerFields">username,password,token</sql>
     <sql id="baseFields">id,username,userimage</sql>
 
+    <sql id="postItemFields">p.id,p.title,p.company,p.website,p.address,p.reward,p.description,p.userid,u.username,u.userimage,p.updatetime</sql>
+
+    <select id="queryPostsByIndustryId" resultType="postItem" parameterType="postListParam">
+        select
+        <include refid="postItemFields"/>
+        FROM
+        (select * from post where industryid = #{industryId} order by updatetime desc limit #{low},#{high}) as p JOIN user_basic as u on p.`userid` = u.`id`
+    </select>
+
     <select id="queryUserInfoByToken" resultType="user" parameterType="String">
         select
         <include refid="allFields"/>

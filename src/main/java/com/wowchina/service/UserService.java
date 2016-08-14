@@ -7,6 +7,7 @@ import com.wowchina.domain.*;
 import com.wowchina.model.CommonResponse;
 import com.wowchina.model.EditUserInfoRequest;
 import com.wowchina.model.LoginResponse;
+import com.wowchina.model.PostListRequest;
 import com.wowchina.util.Parse2MD5;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,19 @@ public class UserService {
     private IndustryDao industryDao;
     @Autowired
     private MajorDao majorDao;
+
+    /**
+     * 根据Industry分类，查询post列表
+     * @param request
+     * @return
+     */
+    public List<PostItem> getPostsByIndustryId(PostListRequest request){
+        PostListParam param = new PostListParam();
+        param.setIndustryId(request.getIndustryId());
+        param.setLow((request.getCurrentPage()-1)*request.getPageSize());
+        param.setHigh(request.getCurrentPage()*request.getPageSize());
+        return userDao.queryPostsByIndustryId(param);
+    }
 
     /**
      * check用户是否合法
