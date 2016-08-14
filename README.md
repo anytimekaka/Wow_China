@@ -3,6 +3,7 @@
 ### 获取首页分页列表
 
 * url:http://112.124.121.126:8080/postlist.action?industryId=2&pageSize=2&currentPage=1
+* 请求参数说明：industryId：表示行业的分类ID，pageSize表示分页中每页包含几条数据，currentPage表示当前页号，从开始
 * 请求方式：GET
 * 返回参数：
 
