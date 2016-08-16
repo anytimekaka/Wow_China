@@ -1,5 +1,10 @@
 # Wow_China
 
+### 消息种类
+
+* Post发布者收到申请人申请的消息
+* 申请人收到申请被拒绝 或者 被接受的消息
+
 ### 获取首页分页列表
 
 * url:http://112.124.121.126:8080/postlist.action?industryId=2&pageSize=2&currentPage=1
