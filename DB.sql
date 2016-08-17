@@ -37,16 +37,11 @@ CREATE TABLE IF NOT EXISTS `intern`.`post` (
   `cityid` INT NULL COMMENT '所在城市',
   `address` VARCHAR(200) NULL COMMENT '详细地址',
   `reward` VARCHAR(45) NULL COMMENT '薪水与报酬',
-  `description` VARCHAR(45) NULL COMMENT '职责描述',
-  `updatetime` DATE NULL COMMENT '更新时间',
+  `description` VARCHAR(1000) NULL COMMENT '职责描述',
+  `updatetime` DATETIME NULL COMMENT '更新时间',
   `userid` INT NULL COMMENT '发布者ID',
-  `username` VARCHAR(45) NOT NULL COMMENT '发布者名称',
-  `userimage` VARCHAR(45) NULL COMMENT '发布者头像图片',
   PRIMARY KEY (`id`)  COMMENT '')
   ENGINE = InnoDB COMMENT '发布的信息';
-ALTER TABLE `intern`.`post` MODIFY `updatetime` DATETIME NULL COMMENT '更新时间';
-ALTER TABLE `intern`.`post` DROP `username`;
-ALTER TABLE `intern`.`post` DROP `userimage`;
 
 DROP  TABLE IF EXISTS `intern`.`apply`;
 CREATE TABLE IF NOT EXISTS `intern`.`apply` (
@@ -140,3 +135,7 @@ INSERT INTO `city` (`cityname`,`country`) VALUES ('Shanghai','China');
 INSERT INTO `city` (`cityname`,`country`) VALUES ('Beijing','China');
 INSERT INTO `city` (`cityname`,`country`) VALUES ('Hangzhou','China');
 INSERT INTO `city` (`cityname`,`country`) VALUES ('Others','China');
+
+INSERT INTO `post` (`title`, `company`, `website`, `industryid`, `opento`, `headcount`, `eligible`, `status`, `cityid`, `address`, `reward`, `description`, `updatetime`, `userid`)
+VALUES
+  ('Does anyone have time this weekend?', 'Dell', 'www.dell.com', 1, '1,2', 30, 0, 0, 2, 'shanghai pudong chuangsha', '800/Day', 'what the fuck', now(), 1);
