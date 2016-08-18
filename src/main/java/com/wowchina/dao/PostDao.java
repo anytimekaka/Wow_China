@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by wangguisheng on 16/6/20.
@@ -26,6 +27,14 @@ public class PostDao {
         Post post = session.selectOne(statement, id);
         session.close();
         return post;
+    }
+
+    public List<Post> getPostInfoByUserId(int userId){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.PostMapper.getPostInfoByUserId";
+        List<Post> posts = session.selectList(statement, userId);
+        session.close();
+        return posts;
     }
 
     public int addPost(Post post){

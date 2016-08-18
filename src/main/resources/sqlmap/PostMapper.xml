@@ -49,6 +49,15 @@
         id = #{id}
     </select>
 
+    <select id="getPostInfoByUserId" resultType="post" parameterType="int">
+        select
+        <include refid="allFields"/>
+        from
+        <include refid="tableName"/>
+        where
+        userid = #{userId}
+    </select>
+
     <insert id="addPost" useGeneratedKeys="true" keyProperty="id" parameterType="post">
         INSERT INTO
         <include refid="tableName"/>
