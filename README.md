@@ -54,46 +54,12 @@ imshealth 账号下面添加了一些post，作为初始的测试数据
 }
 ```
 
-### 按城市ID进行搜索接口
-url:http://112.124.121.126:8080/postlist.action?cityId=1&pageSize=2&currentPage=1
-* 请求参数说明：cityId：表示城市ID，pageSize表示分页中每页包含几条数据，currentPage表示当前页号，从0开始
+### 搜索接口
+* 按城市ID搜索：http://112.124.121.126:8080/searchByCityId.action?cityId=2&pageSize=5&currentPage=1
+* 按面向专业的MajorID搜索：http://112.124.121.126:8080/searchByMajorId.action?majorId=1&pageSize=5&currentPage=1
+* 按关键字搜索：http://112.124.121.126:8080/searchByKeyword.action?keyword=weekend&pageSize=5&currentPage=1
 * 请求方式：GET
-* 返回参数：
-
-```json
-{
-  "code": 0,
-  "message": "success",
-  "result": [
-    {
-      "id": 4,
-      "title": "就差一个鼓手啦",
-      "company": "Dell",
-      "website": "www.dell.com",
-      "address": "北京三里屯",
-      "reward": "2000/小时",
-      "description": "乐队鼓手",
-      "userId": 3,
-      "username": "anytimeka",
-      "userimage": "1471088723670.jpg",
-      "updatetime": "2016-08-13 13:58:03"
-    },
-    {
-      "id": 5,
-      "title": "就差一个鼓手了",
-      "company": "Dell",
-      "website": "www.dell.com",
-      "address": "北京三里屯",
-      "reward": "2000/小时",
-      "description": "乐队鼓手",
-      "userId": 3,
-      "username": "anytimeka",
-      "userimage": "1471088723670.jpg",
-      "updatetime": "2016-08-13 13:57:53"
-    }
-  ]
-}
-```
+* 返回参数格式：与postlist接口一致
 
 ### 获取所有城市列表信息
 
