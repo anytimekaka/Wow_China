@@ -12,6 +12,9 @@ import java.io.Serializable;
 public class PostListRequest implements Serializable {
 
     private int industryId;      // 行业分类id
+    private int cityId; //城市Id
+    private int majorId;
+    private String keyword;
     private int currentPage;   // 当前页
     private int pageSize; //每页数量
 }

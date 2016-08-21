@@ -13,6 +13,9 @@ import java.io.Serializable;
 public class PostListParam implements Serializable {
 
     private int industryId;      // 行业分类id
+    private int cityId; //城市Id
+    private int majorId;
+    private String keyword;
     private int low;   // 分页下限编号
     private int high; // 分页上限编号
 }

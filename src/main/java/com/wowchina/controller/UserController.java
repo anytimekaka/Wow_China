@@ -33,9 +33,22 @@ public class UserController {
     @Autowired
     private HttpServletRequest request;
 
+    @RequestMapping(value = "/getPostListByUserId.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse getPostListByUserId(@RequestParam int userId,
+                                               Model model) {
+        return postService.getPostListByUserId(userId);
+    }
 
+    /**
+     * 首页post列表
+     * @param industryId
+     * @param currentPage
+     * @param pageSize
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/postlist.action", method = RequestMethod.GET)
-    public @ResponseBody  CommonResponse login(@RequestParam int industryId,
+    public @ResponseBody  CommonResponse postListByIndustryId(@RequestParam int industryId,
                                                @RequestParam int currentPage,
                                                @RequestParam int pageSize,
                                                Model model) {
@@ -44,6 +57,51 @@ public class UserController {
         postListRequest.setCurrentPage(currentPage);
         postListRequest.setPageSize(pageSize);
         List<PostItem> list = this.userService.getPostsByIndustryId(postListRequest);
+        CommonResponse response = CommonResponse.successResponse();
+        response.setResult(list);
+        return response;
+    }
+
+    @RequestMapping(value = "/searchByCityId.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse searchByCityId(@RequestParam int cityId,
+                                               @RequestParam int currentPage,
+                                               @RequestParam int pageSize,
+                                               Model model) {
+        PostListRequest postListRequest = new PostListRequest();
+        postListRequest.setCityId(cityId);
+        postListRequest.setCurrentPage(currentPage);
+        postListRequest.setPageSize(pageSize);
+        List<PostItem> list = this.userService.queryPostsByCityId(postListRequest);
+        CommonResponse response = CommonResponse.successResponse();
+        response.setResult(list);
+        return response;
+    }
+
+    @RequestMapping(value = "/searchByKeyword.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse searchByKeyword(@RequestParam String keyword,
+                                               @RequestParam int currentPage,
+                                               @RequestParam int pageSize,
+                                               Model model) {
+        PostListRequest postListRequest = new PostListRequest();
+        postListRequest.setKeyword(keyword);
+        postListRequest.setCurrentPage(currentPage);
+        postListRequest.setPageSize(pageSize);
+        List<PostItem> list = this.userService.queryPostsByKeyword(postListRequest);
+        CommonResponse response = CommonResponse.successResponse();
+        response.setResult(list);
+        return response;
+    }
+
+    @RequestMapping(value = "/searchByMajorId.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse searchByMajorId(@RequestParam int majorId,
+                                               @RequestParam int currentPage,
+                                               @RequestParam int pageSize,
+                                               Model model) {
+        PostListRequest postListRequest = new PostListRequest();
+        postListRequest.setMajorId(majorId);
+        postListRequest.setCurrentPage(currentPage);
+        postListRequest.setPageSize(pageSize);
+        List<PostItem> list = this.userService.queryPostsByMajor(postListRequest);
         CommonResponse response = CommonResponse.successResponse();
         response.setResult(list);
         return response;

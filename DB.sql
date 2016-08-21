@@ -99,6 +99,14 @@ CREATE TABLE IF NOT EXISTS `intern`.`industry` (
   PRIMARY KEY (`id`) COMMENT '主键')
   ENGINE = InnoDB COMMENT '行业和兴趣';
 
+DROP  TABLE IF EXISTS `intern`.`major_post_map`;
+CREATE TABLE IF NOT EXISTS `intern`.`major_post_map` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `majorid` INT NULL COMMENT '面向专业',
+  `postid` INT NULL COMMENT '关联的postid',
+  PRIMARY KEY (`id`) COMMENT '主键')
+  ENGINE = InnoDB COMMENT '面向专业与post的映射表';
+
 INSERT INTO `industry` (`industry`) VALUES ('Administration and office support');
 INSERT INTO `industry` (`industry`) VALUES ('Advertising');
 INSERT INTO `industry` (`industry`) VALUES ('Arts');

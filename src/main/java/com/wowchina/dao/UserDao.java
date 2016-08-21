@@ -29,6 +29,30 @@ public class UserDao {
         return postItems;
     }
 
+    public List<PostItem> queryPostsByCityId(PostListParam postListParam){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.UserMapper.queryPostsByCityId";
+        List<PostItem> postItems = session.selectList(statement, postListParam);
+        session.close();
+        return postItems;
+    }
+
+    public List<PostItem> queryPostsByKeyword(PostListParam postListParam){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.UserMapper.queryPostsByKeyword";
+        List<PostItem> postItems = session.selectList(statement, postListParam);
+        session.close();
+        return postItems;
+    }
+
+    public List<PostItem> queryPostsByMajor(PostListParam postListParam){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.UserMapper.queryPostsByMajor";
+        List<PostItem> postItems = session.selectList(statement, postListParam);
+        session.close();
+        return postItems;
+    }
+
     public User queryUserInfoByToken(String token){
         SqlSession session = this.sessionService.getSession();
         String statement = "com.wowchina.domain.UserMapper.queryUserInfoByToken";

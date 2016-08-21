@@ -30,6 +30,13 @@ public class PostService {
     @Autowired
     private IndustryDao industryDao;
 
+    public CommonResponse<List<Post>> getPostListByUserId(int userId){
+        CommonResponse<List<Post>> response = CommonResponse.successResponse();
+        List<Post> list = this.postDao.getPostInfoByUserId(userId);
+        response.setResult(list);
+        return response;
+    }
+
     /**
      * 根据Post id查询post的信息
      * @param id

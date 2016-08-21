@@ -41,6 +41,30 @@ public class UserService {
         return userDao.queryPostsByIndustryId(param);
     }
 
+    public List<PostItem> queryPostsByCityId(PostListRequest request){
+        PostListParam param = new PostListParam();
+        param.setCityId(request.getCityId());
+        param.setLow((request.getCurrentPage()-1)*request.getPageSize());
+        param.setHigh(request.getCurrentPage()*request.getPageSize());
+        return userDao.queryPostsByCityId(param);
+    }
+
+    public List<PostItem> queryPostsByKeyword(PostListRequest request){
+        PostListParam param = new PostListParam();
+        param.setKeyword("%" + request.getKeyword() + "%");
+        param.setLow((request.getCurrentPage()-1)*request.getPageSize());
+        param.setHigh(request.getCurrentPage()*request.getPageSize());
+        return userDao.queryPostsByKeyword(param);
+    }
+
+    public List<PostItem> queryPostsByMajor(PostListRequest request){
+        PostListParam param = new PostListParam();
+        param.setMajorId(request.getMajorId());
+        param.setLow((request.getCurrentPage()-1)*request.getPageSize());
+        param.setHigh(request.getCurrentPage()*request.getPageSize());
+        return userDao.queryPostsByMajor(param);
+    }
+
     /**
      * check用户是否合法
      * @param userId
