@@ -47,9 +47,7 @@ DROP  TABLE IF EXISTS `intern`.`apply`;
 CREATE TABLE IF NOT EXISTS `intern`.`apply` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `userid` INT NULL COMMENT '申请者Id',
-  `postid` INT NULL COMMENT '职位信息id',
-  `status` INT NULL COMMENT '申请状态（0：等待回复，1：被接受，等待对方发起面试邀请，2：已接收到面试邀请，3：已确认，4：已取消）',
-  `interview` VARCHAR(200) NULL COMMENT '面试安排说明，包括时间、地点、预期需要多长时间等',
+  `postid` INT NULL COMMENT 'post id',
   PRIMARY KEY (`id`)  COMMENT '')
   ENGINE = InnoDB COMMENT '申请记录表';
 
@@ -67,16 +65,15 @@ CREATE TABLE IF NOT EXISTS `intern`.`collection`(
 DROP  TABLE IF EXISTS `intern`.`message`;
 CREATE TABLE IF NOT EXISTS `intern`.`message`(
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `relatedid` INT NULL COMMENT '关联另一个消息的id',
   `userid` INT NULL COMMENT '用户id',
-  `postid` INT NULL COMMENT 'postid',
-  `type` INT NULL COMMENT '消息类型，0：post消息-新申请者，1：apply消息-接受，2：apply-拒绝',
-  `read` INT NULL COMMENT '是否已读，0；未读，1：已读',
+  `postid` INT NULL COMMENT '消息关联的post id',
+  `status` INT NULL COMMENT '发起者状态：未回复0，已回复1，申请者状态：已申请2，接受3，拒绝4',
   `addtime` DATETIME NULL COMMENT '消息的时间',
-  `remark` VARCHAR(100) NULL COMMENT '备注',
   PRIMARY KEY (`id`) COMMENT '主键',
   KEY (`userid`) COMMENT '',
   KEY (`postid`) COMMENT '')
-  ENGINE = InnoDB COMMENT '系统消息';
+  ENGINE = InnoDB COMMENT '消息';
 
 DROP  TABLE IF EXISTS `intern`.`city`;
 CREATE TABLE IF NOT EXISTS `intern`.`city` (

@@ -8,21 +8,18 @@
 
     <sql id="allFields">
         id,
+        relatedid,
         userid,
         postid,
-        type,
-        read,
-        addtime,
-        remark
+        status,
+        addtime
     </sql>
 
     <sql id="noIdFields">
         userid,
         postid,
-        type,
-        read,
-        addtime,
-        remark
+        status,
+        addtime
     </sql>
 
     <insert id="addMessage" useGeneratedKeys="true" keyProperty="id" parameterType="message">
@@ -30,7 +27,7 @@
         <include refid="tableName"/>
         (<include refid="noIdFields"/>)
         VALUES
-        (#{userId},#{postId},#{type},0,now(),#{remark})
+        (#{userId},#{postId},#{status},now())
     </insert>
 
     <update id="updateMessagetoReadedById" parameterType="int">
