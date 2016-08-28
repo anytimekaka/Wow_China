@@ -145,6 +145,56 @@ REJECTED(5, "拒绝");
 }
 ```
 
+### 查询用户所有的post接口
+
+* url:http://112.124.121.126:8080/getPostListByUserId.action?userId=1
+* 请求参数说明：userId:用户ID
+* 请求方式：GET
+* 返回参数：
+
+```json
+{
+  "code": 0,
+  "message": "success",
+  "result": [
+    {
+      "id": 1,
+      "title": "title",
+      "company": "anjuke",
+      "website": "www.anjuke.com",
+      "industryid": 0,
+      "opento": null,
+      "headcount": 0,
+      "eligible": 0,
+      "status": 0,
+      "cityid": 0,
+      "address": null,
+      "reward": null,
+      "description": null,
+      "userid": 1,
+      "updatetime": null
+    },
+    {
+      "id": 2,
+      "title": "title",
+      "company": "anjuke",
+      "website": "www.anjuke.com",
+      "industryid": 0,
+      "opento": null,
+      "headcount": 0,
+      "eligible": 0,
+      "status": 0,
+      "cityid": 0,
+      "address": null,
+      "reward": null,
+      "description": null,
+      "userid": 1,
+      "updatetime": "2016-08-06 00:38:00"
+    }
+  ]
+}
+```
+
 ### 获取首页分页列表接口
 
 * url:http://112.124.121.126:8080/postlist.action?industryId=2&pageSize=2&currentPage=1
