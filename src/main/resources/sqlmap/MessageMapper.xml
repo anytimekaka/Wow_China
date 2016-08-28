@@ -12,46 +12,61 @@
         userid,
         postid,
         status,
-        addtime
+        updatetime
     </sql>
 
-    <sql id="noIdFields">
+    <sql id="insertFields">
         userid,
         postid,
         status,
-        addtime
+        updatetime
     </sql>
 
     <insert id="addMessage" useGeneratedKeys="true" keyProperty="id" parameterType="message">
         INSERT INTO
         <include refid="tableName"/>
-        (<include refid="noIdFields"/>)
+        (<include refid="insertFields"/>)
         VALUES
         (#{userId},#{postId},#{status},now())
     </insert>
 
-    <update id="updateMessagetoReadedById" parameterType="int">
+    <select id="queryMessageByUserIdAndStatus" resultType="message">
+        SELECT <include refid="allFields"></include>
+        FROM <include refid="tableName"></include>
+        WHERE userid = #{userId}
+        and status IN
+        <foreach item="item" index="index" collection="status"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        ORDER BY updatetime desc
+    </select>
+
+    <select id="queryMessageByUserId" parameterType="int" resultType="message">
+        SELECT <include refid="allFields"></include>
+        FROM <include refid="tableName"></include>
+        WHERE userid = #{userId} ORDER BY updatetime desc
+    </select>
+
+    <update id="updateMessageById" parameterType="int">
         update
         <include refid="tableName"/>
         SET
-        read = 1
+        <if test="relatedId!=0">
+            relatedid = #{relatedId},
+        </if>
+        <if test="userId!=0">
+            userid = #{userId},
+        </if>
+        <if test="postId!=0">
+            postid = #{postId},
+        </if>
+        <if test="status!=0">
+            status = #{status},
+        </if>
+        updatetime = now()
         WHERE
         id=#{id}
     </update>
-
-    <update id="updateMessagetoReadedByUserId" parameterType="int">
-        update
-        <include refid="tableName"/>
-        SET
-        read = 1
-        WHERE
-        userid=#{userId}
-    </update>
-
-    <select id="getUnreadMessageCountByUserId" parameterType="int" resultType="int">
-        select count(*) from
-        <include refid="tableName"/>
-        where userid=#{userId}
-    </select>
 
 </mapper>

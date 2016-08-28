@@ -68,8 +68,8 @@ CREATE TABLE IF NOT EXISTS `intern`.`message`(
   `relatedid` INT NULL COMMENT '关联另一个消息的id',
   `userid` INT NULL COMMENT '用户id',
   `postid` INT NULL COMMENT '消息关联的post id',
-  `status` INT NULL COMMENT '发起者状态：未回复0，已回复1，申请者状态：已申请2，接受3，拒绝4',
-  `addtime` DATETIME NULL COMMENT '消息的时间',
+  `status` INT NULL COMMENT '发起者状态：未回复1，已回复2，申请者状态：已申请3，接受4，拒绝5',
+  `updatetime` DATETIME NULL COMMENT '消息的更新时间',
   PRIMARY KEY (`id`) COMMENT '主键',
   KEY (`userid`) COMMENT '',
   KEY (`postid`) COMMENT '')

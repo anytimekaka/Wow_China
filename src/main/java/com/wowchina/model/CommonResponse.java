@@ -44,6 +44,10 @@ public class CommonResponse<T> implements Serializable{
         return new CommonResponse(1, message);
     }
 
+    public  static CommonResponse errorResponse(int code, String message){
+        return new CommonResponse(code, message);
+    }
+
     public static CommonResponse authErrorResponse(){
         return CommonResponse.errorResponse("auth error");
     }

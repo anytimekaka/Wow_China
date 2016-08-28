@@ -1,16 +1,149 @@
 # Wow_China
 
-
 ### 初始数据
 
 账号：imshealth，密码：123456， token：d12cd741e009c71571503372d82d4cae
 imshealth 账号下面添加了一些post，作为初始的测试数据
 城市和行业信息已经按照Stan之前给的加到库里面了，专业信息我自己加了一些，暂且够用了！
 
-### 消息种类
+### Response状态
 
-* Post发布者收到申请人申请的消息
-* 申请人收到申请被拒绝 或者 被接受的消息
+```json
+SUCCESS(0,"成功"),
+ALREADY_APPLY(10, "已申请，不能重复申请"),
+USER_IS_POSTER(11, "是发起者，不能申请");
+```
+
+### 消息
+
+消息类型：
+
+```json
+UNREPLY(1, "未回复"),
+REPLIED(2, "已回复"),
+APPLIED(3, "已申请"),
+ACCEPTED(4, "接受"),
+REJECTED(5, "拒绝");
+```
+
+消息结构：
+
+```json
+        {
+          "id": 7,          // 消息的ID
+          "relatedId": 8,   // 关联的消息ID
+          "userId": 1,      // 消息属于哪个用户
+          "postId": 8,      // 消息关联哪个post
+          "status": 2,      // 消息的状态（见上面说明）
+          "updateTime": "2016-08-28 15:11:10"      // 更新时间
+        }
+```
+
+说明：消息与消息之间是一对一关联的，一条post消息，对应一条apply消息。例如：用户在申请时，会生成一条apply消息（已申请），post发布者会收到一条post消息（未回复），这两条消息是一一对应的，使用relatedId作为关联
+
+### 获取个人Post消息列表
+
+* url: http://112.124.121.126:8080/getApplyMessageList.action?userId=4&token=c46ccba3a280dd18454a868b85e8c28d
+* 请求参数说明：userId：用户ID，token：用户token
+* 请求方式：GET
+* 返回参数
+
+```json
+{
+  "code": 0,
+  "message": "获取Post消息列表成功",
+  "result": [
+    {
+      "status": 1,
+      "desc": "未回复",
+      "messages": []
+    },
+    {
+      "status": 2,
+      "desc": "已回复",
+      "messages": [
+        {
+          "id": 7,
+          "relatedId": 8,
+          "userId": 1,
+          "postId": 8,
+          "status": 2,
+          "updateTime": "2016-08-28 15:11:10"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 获取个人Apply消息列表
+
+* url:http://112.124.121.126:8080/getApplyMessageList.action?userId=4&token=c46ccba3a280dd18454a868b85e8c28d
+* 请求参数说明：userId：用户ID，token：用户token
+* 请求方式：GET
+* 返回参数：
+
+```json
+{
+  "code": 0,
+  "message": "获取Apply消息列表成功",
+  "result": [
+    {
+      "id": 8,
+      "relatedId": 7,
+      "userId": 4,
+      "postId": 8,
+      "status": 5,
+      "updateTime": "2016-08-28 15:11:10"
+    }
+  ]
+}
+```
+
+### 申请
+
+* url:http://112.124.121.126:8080/apply.action?userId=4&token=c46ccba3a280dd18454a868b85e8c28d&postId=8
+* 请求参数说明：userId：用户ID，token：用户token，postId：申请的post的ID
+* 请求方式：GET
+* 返回参数：
+
+```json
+{
+  "code": 10,
+  "message": "已申请，不能重复申请",
+  "result": null
+}
+```
+
+### 同意申请
+
+* url:http://112.124.121.126:8080/accept.action?userId=1&token=e1e04eb78b9f91bbd91fac9f0b86f868&messageId=5&relatedId=6
+* 请求参数说明：userId：用户ID，token：用户token，messageId：回复的哪条消息，relatedId：关联的那条apply消息ID
+* 请求方式：GET
+* 返回参数：
+
+```json
+{
+  "code": 0,
+  "message": "接受成功",
+  "result": null
+}
+```
+
+### 拒绝申请
+
+* url:http://112.124.121.126:8080/refuse.action?userId=1&token=e1e04eb78b9f91bbd91fac9f0b86f868&messageId=7&relatedId=8
+* 请求参数说明：userId：用户ID，token：用户token，messageId：回复的哪条消息，relatedId：关联的那条apply消息ID
+* 请求方式：GET
+* 返回参数：
+
+```json
+{
+  "code": 0,
+  "message": "拒绝成功",
+  "result": null
+}
+```
 
 ### 获取首页分页列表接口
 

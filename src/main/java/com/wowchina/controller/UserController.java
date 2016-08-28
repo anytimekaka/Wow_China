@@ -1,5 +1,6 @@
 package com.wowchina.controller;
 
+import com.wowchina.domain.Apply;
 import com.wowchina.domain.PostItem;
 import com.wowchina.domain.User;
 import com.wowchina.domain.UserInfo;
@@ -33,6 +34,96 @@ public class UserController {
     @Autowired
     private HttpServletRequest request;
 
+    @RequestMapping(value = "/getPostMessageList.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse getPostMessageList(@RequestParam int userId,
+                                                @RequestParam String token,
+                                                Model model) {
+        if(!this.userService.checkUser(userId, token)){
+            return CommonResponse.authErrorResponse();
+        }
+        return userService.getPostMessageList(userId);
+    }
+
+    @RequestMapping(value = "/getApplyMessageList.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse getApplyMessageList(@RequestParam int userId,
+                                                @RequestParam String token,
+                                                Model model) {
+        if(!this.userService.checkUser(userId, token)){
+            return CommonResponse.authErrorResponse();
+        }
+        return userService.getApplyMessageList(userId);
+    }
+
+    /**
+     * 发布者接受接口
+     * @param userId
+     * @param token
+     * @param messageId
+     * @param relatedId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/accept.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse accept(@RequestParam int userId,
+                                               @RequestParam String token,
+                                               @RequestParam int messageId,
+                                               @RequestParam int relatedId,
+                                               Model model) {
+        if(!this.userService.checkUser(userId, token)){
+            return CommonResponse.authErrorResponse();
+        }
+        return userService.accept(messageId, relatedId);
+    }
+
+    /**
+     * 发布者拒绝接口
+     * @param userId
+     * @param token
+     * @param messageId
+     * @param relatedId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/refuse.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse refuse(@RequestParam int userId,
+                                                @RequestParam String token,
+                                                @RequestParam int messageId,
+                                                @RequestParam int relatedId,
+                                                Model model) {
+        if(!this.userService.checkUser(userId, token)){
+            return CommonResponse.authErrorResponse();
+        }
+        return userService.refuse(messageId, relatedId);
+    }
+
+    /**
+     * 申请者申请接口
+     * @param userId
+     * @param token
+     * @param postId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/apply.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse apply(@RequestParam int userId,
+                                               @RequestParam String token,
+                                               @RequestParam int postId,
+                                               Model model) {
+        if(!this.userService.checkUser(userId, token)){
+            return CommonResponse.authErrorResponse();
+        }
+        Apply apply = new Apply();
+        apply.setPostId(postId);
+        apply.setUserId(userId);
+        return userService.apply(apply);
+    }
+
+    /**
+     * 查询用户的所有post列表
+     * @param userId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/getPostListByUserId.action", method = RequestMethod.GET)
     public @ResponseBody  CommonResponse getPostListByUserId(@RequestParam int userId,
                                                Model model) {

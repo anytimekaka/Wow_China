@@ -38,6 +38,17 @@ public class PostService {
     }
 
     /**
+     * 判断此userId是否是此post的作者
+     * @param userId
+     * @param postId
+     * @return
+     */
+    public boolean isUserPoster(int userId, int postId){
+        Post post = postDao.getPostInfoById(postId);
+        return userId == post.getUserid();
+    }
+
+    /**
      * 根据Post id查询post的信息
      * @param id
      * @return
