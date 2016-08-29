@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wowchina.domain.MajorMapper">
+
+    <sql id="tableName">major</sql>
+    <sql id="allFields">id,major</sql>
+
+    <select id="queryMajorById" resultType="major" parameterType="int">
+        select
+        <include refid="allFields"/>
+        from
+        <include refid="tableName"/>
+        where id = #{majorId}
+    </select>
+
+    <select id="queryAllMajor" resultType="major">
+        select
+        <include refid="allFields"/>
+        from
+        <include refid="tableName"/>
+    </select>
+
+</mapper>
