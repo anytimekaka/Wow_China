@@ -43,7 +43,7 @@ REJECTED(5, "拒绝");
 
 ### 获取个人Post消息列表
 
-* url: http://112.124.121.126:8080/getApplyMessageList.action?userId=4&token=c46ccba3a280dd18454a868b85e8c28d
+* url: http://112.124.121.126:8080/getPostMessageList.action?userId=14&token=d12cd741e009c71571503372d82d4cae
 * 请求参数说明：userId：用户ID，token：用户token
 * 请求方式：GET
 * 返回参数
@@ -56,21 +56,21 @@ REJECTED(5, "拒绝");
     {
       "status": 1,
       "desc": "未回复",
-      "messages": []
+      "messages": [
+        {
+          "id": 1,
+          "relatedId": 2,
+          "userId": 14,
+          "postId": 17,
+          "status": 1,
+          "updateTime": "2016-08-28 21:08:53"
+        }
+      ]
     },
     {
       "status": 2,
       "desc": "已回复",
-      "messages": [
-        {
-          "id": 7,
-          "relatedId": 8,
-          "userId": 1,
-          "postId": 8,
-          "status": 2,
-          "updateTime": "2016-08-28 15:11:10"
-        }
-      ]
+      "messages": []
     }
   ]
 }
@@ -78,7 +78,7 @@ REJECTED(5, "拒绝");
 
 ### 获取个人Apply消息列表
 
-* url:http://112.124.121.126:8080/getApplyMessageList.action?userId=4&token=c46ccba3a280dd18454a868b85e8c28d
+* url:http://112.124.121.126:8080/getApplyMessageList.action?userId=1&token=0a676539bdd470b4404eec6b115e0fae
 * 请求参数说明：userId：用户ID，token：用户token
 * 请求方式：GET
 * 返回参数：
@@ -89,12 +89,12 @@ REJECTED(5, "拒绝");
   "message": "获取Apply消息列表成功",
   "result": [
     {
-      "id": 8,
-      "relatedId": 7,
-      "userId": 4,
-      "postId": 8,
-      "status": 5,
-      "updateTime": "2016-08-28 15:11:10"
+      "id": 2,
+      "relatedId": 1,
+      "userId": 1,
+      "postId": 17,
+      "status": 3,
+      "updateTime": "2016-08-28 21:08:53"
     }
   ]
 }
