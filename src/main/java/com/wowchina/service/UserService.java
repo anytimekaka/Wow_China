@@ -217,6 +217,19 @@ public class UserService {
         return userDao.queryPostsByMajor(param);
     }
 
+    public List<PostItem> queryPostsByAllConditions(PostListRequest request){
+        PostListParam param = new PostListParam();
+        param.setMajorId(request.getMajorId());
+        if(null == request.getKeyword()){
+            request.setKeyword("");
+        }
+        param.setKeyword("%" + request.getKeyword() + "%");
+        param.setCityId(request.getCityId());
+        param.setLow((request.getCurrentPage()-1)*request.getPageSize());
+        param.setHigh(request.getCurrentPage()*request.getPageSize());
+        return userDao.queryPostsByAllConditions(param);
+    }
+
     /**
      * check用户是否合法
      * @param userId

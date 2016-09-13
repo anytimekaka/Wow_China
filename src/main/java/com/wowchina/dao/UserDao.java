@@ -53,6 +53,14 @@ public class UserDao {
         return postItems;
     }
 
+    public List<PostItem> queryPostsByAllConditions(PostListParam postListParam){
+        SqlSession session = this.sessionService.getSession();
+        String statement = "com.wowchina.domain.UserMapper.queryPostsByAllConditions";
+        List<PostItem> postItems = session.selectList(statement, postListParam);
+        session.close();
+        return postItems;
+    }
+
     public User queryUserInfoByToken(String token){
         SqlSession session = this.sessionService.getSession();
         String statement = "com.wowchina.domain.UserMapper.queryUserInfoByToken";

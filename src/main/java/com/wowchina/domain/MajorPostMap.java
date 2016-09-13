@@ -13,4 +13,9 @@ public class MajorPostMap implements Serializable{
     private int id;
     private int majorId;
     private int postId;
+
+    public MajorPostMap(int majorId, int postId){
+        this.majorId = majorId;
+        this.postId = postId;
+    }
 }

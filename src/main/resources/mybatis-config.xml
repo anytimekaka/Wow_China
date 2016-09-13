@@ -16,7 +16,7 @@
         <property name="driver" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/intern"/>
         <property name="username" value="root"/>
-        <property name="password" value="mysql"/>
+        <property name="password" value=""/>
       </dataSource>
     </environment>
   </environments>
@@ -29,5 +29,6 @@
     <mapper resource="sqlmap/CityMapper.xml"/>
     <mapper resource="sqlmap/ApplyMapper.xml"/>
     <mapper resource="sqlmap/MessageMapper.xml"/>
+    <mapper resource="sqlmap/MajorPostMapMapper.xml"/>
   </mappers>
 </configuration>

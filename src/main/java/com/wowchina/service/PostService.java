@@ -1,13 +1,11 @@
 package com.wowchina.service;
 
-import com.wowchina.dao.IndustryDao;
-import com.wowchina.dao.MajorDao;
-import com.wowchina.dao.PostDao;
-import com.wowchina.dao.UserDao;
+import com.wowchina.dao.*;
 import com.wowchina.domain.*;
 import com.wowchina.model.AddPostRequest;
 import com.wowchina.model.CommonResponse;
 import com.wowchina.model.GetPostInfoResponse;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +27,8 @@ public class PostService {
     private MajorDao majorDao;
     @Autowired
     private IndustryDao industryDao;
+    @Autowired
+    private MajorPostMapDao majorPostMapDao;
 
     public CommonResponse<List<Post>> getPostListByUserId(int userId){
         CommonResponse<List<Post>> response = CommonResponse.successResponse();
@@ -78,6 +78,12 @@ public class PostService {
         BeanUtils.copyProperties(request, post);
         post.setUserid(request.getUserId());
         int postId = postDao.addPost(post);
+        if(StringUtils.isNotEmpty(request.getOpento())){
+            String[] majorIds = request.getOpento().split(",");
+            for(String majorId : majorIds){
+                majorPostMapDao.addMajorPostMap(new MajorPostMap(Integer.parseInt(majorId), postId));
+            }
+        }
         CommonResponse commonResponse = CommonResponse.successResponse();
         commonResponse.setResult(postId);
         return commonResponse;

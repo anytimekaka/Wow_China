@@ -2,24 +2,18 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wowchina.domain.MajorMapper">
+<mapper namespace="com.wowchina.domain.MajorPostMapMapper">
 
-    <sql id="tableName">major</sql>
-    <sql id="allFields">id,major</sql>
+    <sql id="tableName">major_post_map</sql>
+    <sql id="allFields">id,majorid,postid</sql>
+    <sql id="insertFields">majorid,postid</sql>
 
-    <select id="queryMajorById" resultType="major" parameterType="int">
-        select
-        <include refid="allFields"/>
-        from
+    <insert id="addMajorPostMap" useGeneratedKeys="true" keyProperty="id" parameterType="majorPostMap">
+        INSERT INTO
         <include refid="tableName"/>
-        where id = #{majorId}
-    </select>
-
-    <select id="queryAllMajor" resultType="major">
-        select
-        <include refid="allFields"/>
-        from
-        <include refid="tableName"/>
-    </select>
+        (<include refid="insertFields"/>)
+        VALUES
+        (#{majorId},#{postId})
+    </insert>
 
 </mapper>

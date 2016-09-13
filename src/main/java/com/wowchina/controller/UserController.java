@@ -153,6 +153,26 @@ public class UserController {
         return response;
     }
 
+    @RequestMapping(value = "/search.action", method = RequestMethod.GET)
+    public @ResponseBody  CommonResponse searchByCityId(@RequestParam(required = false) int cityId,
+                                                        @RequestParam(required = false) int majorId,
+                                                        @RequestParam(required = false) String keyword,
+                                                        @RequestParam int currentPage,
+                                                        @RequestParam int pageSize,
+                                                        Model model) {
+
+        PostListRequest postListRequest = new PostListRequest();
+        postListRequest.setCityId(cityId);
+        postListRequest.setMajorId(majorId);
+        postListRequest.setKeyword(keyword);
+        postListRequest.setCurrentPage(currentPage);
+        postListRequest.setPageSize(pageSize);
+        List<PostItem> list = this.userService.queryPostsByAllConditions(postListRequest);
+        CommonResponse response = CommonResponse.successResponse();
+        response.setResult(list);
+        return response;
+    }
+
     @RequestMapping(value = "/searchByCityId.action", method = RequestMethod.GET)
     public @ResponseBody  CommonResponse searchByCityId(@RequestParam int cityId,
                                                @RequestParam int currentPage,

@@ -39,6 +39,26 @@
         ((select distinct p.id,p.title,p.company,p.website,p.address,p.reward,p.description,p.userid,p.updatetime from post as p join (select * from major_post_map where majorid=#{majorId}) as map on p.id = map.postid)) as p JOIN user_basic as u on p.`userid` = u.`id`  order by updatetime desc limit #{low},#{high}
     </select>
 
+    <select id="queryPostsByAllConditions" resultType="postItem" parameterType="postListParam">
+        select
+        <include refid="postItemFields"/>
+        FROM
+        (
+        (select distinct p.id,p.title,p.company,p.website,p.address,p.reward,p.description,p.userid,p.updatetime from
+        (select * from post
+        WHERE 1=1
+        <if test="cityId!=0">AND cityid = #{cityId}</if>
+        AND title like #{keyword} or description like #{keyword}
+        )
+        as p
+        join
+        (select * from major_post_map<if test="majorId!=0"> where majorid=#{majorId} </if>) as map on p.id = map.postid)) as p
+          JOIN
+          user_basic as u
+          on p.`userid` = u.`id`
+          order by updatetime desc limit #{low},#{high}
+    </select>
+
     <select id="queryUserInfoByToken" resultType="user" parameterType="String">
         select
         <include refid="allFields"/>
