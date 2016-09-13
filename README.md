@@ -241,6 +241,7 @@ REJECTED(5, "拒绝");
 * 按城市ID搜索：http://112.124.121.126:8080/searchByCityId.action?cityId=2&pageSize=5&currentPage=1
 * 按面向专业的MajorID搜索：http://112.124.121.126:8080/searchByMajorId.action?majorId=1&pageSize=5&currentPage=1
 * 按关键字搜索：http://112.124.121.126:8080/searchByKeyword.action?keyword=weekend&pageSize=5&currentPage=1
+* 所有条件搜索：http://112.124.121.126:8080/search.action?cityId=2&majorId=0&keyword=&pageSize=5&currentPage=1
 * 请求方式：GET
 * 返回参数格式：与postlist接口一致
 
