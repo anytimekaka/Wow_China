@@ -5,7 +5,7 @@
 <mapper namespace="com.wowchina.domain.UserMapper">
 
     <sql id="tableName">user_basic</sql>
-    <sql id="allFields">id,username,password,token,userimage,realname,university,majorid,industryids,skills,location,email,tel,certificates,linkedinid,linkedinusername,linkedinprofileurl,facebook</sql>
+    <sql id="allFields">id,username,password,token,userimage,realname,sex,birthday,experience,university,majorid,industryids,skills,location,email,tel,certificates,linkedinid,linkedinusername,linkedinprofileurl,facebook</sql>
     <sql id="registerFields">username,password,token</sql>
     <sql id="baseFields">id,username,userimage</sql>
 
@@ -96,6 +96,9 @@
         <include refid="tableName"/>
         SET
         realname=#{realname},
+        sex=#{sex},
+        birthday=#{birthday},
+        experience=#{experience},
         university=#{university},
         majorid=#{majorid},
         industryids=#{industryids},

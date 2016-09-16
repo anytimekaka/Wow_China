@@ -253,6 +253,9 @@ public class UserService {
             Major major = this.majorDao.queryMajorById(user.getMajorid());
             UserInfo userInfo = new UserInfo();
             userInfo.setMajor(major);
+            userInfo.setSex(user.getSex());
+            userInfo.setBirthday(user.getBirthday());
+            userInfo.setExperience(user.getExperience());
             userInfo.setIndustrys(industryList);
             userInfo.setId(userId);
             userInfo.setCertificates(user.getCertificates());

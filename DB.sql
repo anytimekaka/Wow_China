@@ -105,6 +105,12 @@ CREATE TABLE IF NOT EXISTS `intern`.`major_post_map` (
   PRIMARY KEY (`id`) COMMENT '主键')
   ENGINE = InnoDB COMMENT '面向专业与post的映射表';
 
+ALTER TABLE `intern`.`user_basic` ADD sex int(4) default '0';
+ALTER TABLE `intern`.`user_basic` ADD birthday VARCHAR(20);
+ALTER TABLE `intern`.`user_basic` ADD experience VARCHAR(500);
+
+ALTER TABLE `intern`.`post` ADD deadline VARCHAR(20) DEFAULT "2016-08-08";
+
 INSERT INTO `industry` (`industry`) VALUES ('Administration and office support');
 INSERT INTO `industry` (`industry`) VALUES ('Advertising');
 INSERT INTO `industry` (`industry`) VALUES ('Arts');

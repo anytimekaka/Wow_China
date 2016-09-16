@@ -20,6 +20,7 @@
         address,
         reward,
         description,
+        deadline,
         userid,
         updatetime
     </sql>
@@ -36,6 +37,7 @@
         address,
         reward,
         description,
+        deadline,
         userid,
         updatetime
     </sql>
@@ -63,7 +65,7 @@
         <include refid="tableName"/>
         (<include refid="noIdFields"/>)
         VALUES
-        (#{title},#{company},#{website},#{industryid},#{opento},#{headcount},#{eligible},#{cityid},#{address},#{reward},#{description},#{userid},now())
+        (#{title},#{company},#{website},#{industryid},#{opento},#{headcount},#{eligible},#{cityid},#{address},#{reward},#{description},#{deadline},#{userid},now())
     </insert>
 
     <update id="updatePost" parameterType="post">
@@ -102,6 +104,9 @@
         </if>
         <if test="description!=null and description!=''">
             description = #{description},
+        </if>
+        <if test="deadline!=null and deadline!=''">
+            deadline = #{deadline},
         </if>
         <if test="userid!=0">
             userid = #{userid},

@@ -5,6 +5,7 @@ import com.wowchina.domain.*;
 import com.wowchina.model.AddPostRequest;
 import com.wowchina.model.CommonResponse;
 import com.wowchina.model.GetPostInfoResponse;
+import com.wowchina.util.TimeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

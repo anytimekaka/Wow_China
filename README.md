@@ -171,6 +171,7 @@ REJECTED(5, "拒绝");
       "address": null,
       "reward": null,
       "description": null,
+      "deadline": "2016-08-08",
       "userid": 1,
       "updatetime": null
     },
@@ -188,6 +189,7 @@ REJECTED(5, "拒绝");
       "address": null,
       "reward": null,
       "description": null,
+      "deadline": "2016-08-08",
       "userid": 1,
       "updatetime": "2016-08-06 00:38:00"
     }
@@ -349,7 +351,8 @@ REJECTED(5, "拒绝");
     "cityid": 2,
     "address": "shanghai pudong chuangsha",
     "reward": "800",
-    "description": "what the fuck"
+    "description": "what the fuck",
+    "deadline": "2016-08-08",
 }
 ```
 
@@ -393,6 +396,7 @@ REJECTED(5, "拒绝");
       "address": "北京三里屯",
       "reward": "2000/小时",
       "description": "乐队鼓手",
+      "deadline": "2016-08-08",
       "userid": 3,
       "updatetime": "2016-08-13 13:58:03"
     },
@@ -433,7 +437,8 @@ REJECTED(5, "拒绝");
     "cityid": 2,
     "address": "北京三里屯",
     "reward": "2000/小时",
-    "description": "乐队鼓手"
+    "description": "乐队鼓手",
+    "deadline": "2016-10-10"
 }
 ```
 
@@ -497,6 +502,9 @@ REJECTED(5, "拒绝");
     "id": 3,
     "userimage": "1469373710923",
     "realname": "王贵生",
+    "birthday": "2001-08-01",
+    "sex": 1,
+    "experience": "no experience",
     "university": "TJ",
     "major": {
       "id": 1,
@@ -541,6 +549,9 @@ REJECTED(5, "拒绝");
     "token":"0a676539bdd470b4404eec6b115e0fae",
 
     "realname": "王贵生",
+    "birthday": "2001-08-01",
+    "sex": 1,
+    "experience": "no experience",
     "university": "TJ",
     "majorid": 1,
     "industryids": "2,3",

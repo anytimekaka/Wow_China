@@ -15,7 +15,12 @@ public class User implements Serializable{
     private String password;   //密码 
     private String token;   //用户验证token 
     private String userimage;   //用户头像图片名称，默认为系统自带图片，上传后用用户名重命名，沿用之前后缀 
-    private String realname;   //用户真实姓名 
+    private String realname;   //用户真实姓名
+
+    private int sex;           //性别
+    private String birthday;   //生日
+    private String experience;   //工作经历
+
     private String university;   //学校 
     private int majorid;   //所学专业id（仅此一个）
     private String industryids;   //工作行业（多选，以『,』分割） 

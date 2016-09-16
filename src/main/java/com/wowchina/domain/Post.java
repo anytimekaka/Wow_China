@@ -24,6 +24,7 @@ public class Post implements Serializable{
     private String address; // 详细地址
     private String reward;  // 薪水与报酬
     private String description; // 职责描述
+    private String deadline;      // 截止日期
     private int userid;         // 发布者ID
     private Date updatetime;  // 更新时间
 }

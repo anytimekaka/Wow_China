@@ -12,7 +12,12 @@ public class UserInfo implements Serializable{
 
     private int id;  //用户主键id
     private String userimage;   //用户头像图片名称，默认为系统自带图片，上传后用用户名重命名，沿用之前后缀
-    private String realname;   //用户真实姓名 
+    private String realname;   //用户真实姓名
+
+    private int sex;   //性别
+    private String birthday;   //用户生日
+    private String experience;   //工作经验
+
     private String university;   //学校 
     private Major major;   //所学专业（仅此一个）
     private List<Industry> industrys;   //工作行业

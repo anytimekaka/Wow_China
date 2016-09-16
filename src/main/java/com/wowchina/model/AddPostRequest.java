@@ -23,4 +23,5 @@ public class AddPostRequest {
     private String address; // 详细地址
     private String reward;  // 薪水与报酬
     private String description; // 职责描述
+    private String deadline;    // 截止时间
 }
