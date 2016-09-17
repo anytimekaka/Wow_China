@@ -30,16 +30,16 @@
         (#{userId},#{postId},#{status},now())
     </insert>
 
-    <select id="queryMessageByUserIdAndStatus" resultType="message">
-        SELECT <include refid="allFields"></include>
-        FROM <include refid="tableName"></include>
-        WHERE userid = #{userId}
-        and status IN
+    <select id="queryMessageByUserIdAndStatus" resultType="messageInfo">
+        select message.id,message.relatedid,message.userid,user_basic.username,user_basic.userimage,message.postid,message.status,message.updatetime from
+        message JOIN user_basic on message.userid = user_basic.id
+        WHERE message.userid = #{userId}
+        and message.status IN
         <foreach item="item" index="index" collection="status"
                  open="(" separator="," close=")">
             #{item}
         </foreach>
-        ORDER BY updatetime desc
+        ORDER BY message.updatetime desc
     </select>
 
     <select id="queryMessageByUserId" parameterType="int" resultType="message">

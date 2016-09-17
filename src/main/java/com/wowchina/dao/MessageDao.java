@@ -1,6 +1,7 @@
 package com.wowchina.dao;
 
 import com.wowchina.domain.Message;
+import com.wowchina.domain.MessageInfo;
 import com.wowchina.service.SessionService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,15 +39,15 @@ public class MessageDao {
         return messages;
     }
 
-    public List<Message> queryMessageByUserIdAndStatus(int userId, List<Integer> status){
+    public List<MessageInfo> queryMessageByUserIdAndStatus(int userId, List<Integer> status){
         Map<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("userId", userId);
         paramMap.put("status", status);
         SqlSession session = this.sessionService.getSession();
         String statement = "com.wowchina.domain.MessageMapper.queryMessageByUserIdAndStatus";
-        List<Message> messages = session.selectList(statement, paramMap);
+        List<MessageInfo> messageInfos = session.selectList(statement, paramMap);
         session.close();
-        return messages;
+        return messageInfos;
     }
 
     public void updateMessageById(Message message){

@@ -1,6 +1,7 @@
 package com.wowchina.model;
 
 import com.wowchina.domain.Message;
+import com.wowchina.domain.MessageInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -14,5 +15,5 @@ public class PostMessageResponse {
     private int status;
     private String desc;
 
-    private List<Message> messages;
+    private List<MessageInfo> messages;
 }

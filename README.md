@@ -6,6 +6,60 @@
 imshealth 账号下面添加了一些post，作为初始的测试数据
 城市和行业信息已经按照Stan之前给的加到库里面了，专业信息我自己加了一些，暂且够用了！
 
+
++----+----------+---------+
+| id | cityname | country |
++----+----------+---------+
+|  1 | Shanghai | China   |
+|  2 | Beijing  | China   |
+|  3 | Hangzhou | China   |
+|  4 | Others   | China   |
++----+----------+---------+
+
+
++----+-----------------------------------+
+| id | industry                          |
++----+-----------------------------------+
+|  1 | Administration and office support |
+|  2 | Advertising                       |
+|  3 | Arts                              |
+|  4 | Media                             |
+|  5 | Creative Industries               |
+|  6 | Education and training            |
+|  7 | Entertainment & Recreation        |
+|  8 | Hospitality and tourism           |
+|  9 | Marketing and Communications      |
+| 10 | NGOs and Charities                |
+| 11 | Research & Academic               |
+| 12 | Science and Technology            |
+| 13 | Sports Recreation                 |
+| 14 | Transport and Logistics           |
+| 15 | Travel & Tourism                  |
+| 16 | Acting & Modeling                 |
+| 17 | Photography                       |
+| 18 | Others                            |
++----+-----------------------------------+
+
+
++----+---------------------+
+| id | major               |
++----+---------------------+
+|  1 | Philosophy          |
+|  2 | Logic               |
+|  3 | Ethics              |
+|  4 | Aesthetics          |
+|  5 | Science of Religion |
+|  6 | Economics           |
+|  7 | Public Finance      |
+|  8 | Statistics          |
+|  9 | Law                 |
+| 10 | Diplomacy           |
+| 11 | Education           |
+| 12 | Psychology          |
++----+---------------------+
+
+
+
 ### Response状态
 
 ```json
@@ -43,7 +97,7 @@ REJECTED(5, "拒绝");
 
 ### 获取个人Post消息列表
 
-* url: http://112.124.121.126:8080/getPostMessageList.action?userId=14&token=d12cd741e009c71571503372d82d4cae
+* url: http://112.124.121.126:8080/getPostMessageList.action?userId=1&token=e1e04eb78b9f91bbd91fac9f0b86f868
 * 请求参数说明：userId：用户ID，token：用户token
 * 请求方式：GET
 * 返回参数
@@ -78,7 +132,7 @@ REJECTED(5, "拒绝");
 
 ### 获取个人Apply消息列表
 
-* url:http://112.124.121.126:8080/getApplyMessageList.action?userId=1&token=0a676539bdd470b4404eec6b115e0fae
+* url:http://112.124.121.126:8080/getApplyMessageList.action?userId=2&token=17236eb9b56d6ba55c36089a5aacd6d7
 * 请求参数说明：userId：用户ID，token：用户token
 * 请求方式：GET
 * 返回参数：
@@ -102,7 +156,7 @@ REJECTED(5, "拒绝");
 
 ### 申请
 
-* url:http://112.124.121.126:8080/apply.action?userId=4&token=c46ccba3a280dd18454a868b85e8c28d&postId=8
+* url:http://112.124.121.126:8080/apply.action?userId=2&token=17236eb9b56d6ba55c36089a5aacd6d7&postId=1
 * 请求参数说明：userId：用户ID，token：用户token，postId：申请的post的ID
 * 请求方式：GET
 * 返回参数：
@@ -163,14 +217,14 @@ REJECTED(5, "拒绝");
       "company": "anjuke",
       "website": "www.anjuke.com",
       "industryid": 0,
-      "opento": null,
+      "opento": "",
       "headcount": 0,
       "eligible": 0,
       "status": 0,
       "cityid": 0,
-      "address": null,
-      "reward": null,
-      "description": null,
+      "address": "",
+      "reward": "",
+      "description": "",
       "deadline": "2016-08-08",
       "userid": 1,
       "updatetime": null
@@ -181,14 +235,14 @@ REJECTED(5, "拒绝");
       "company": "anjuke",
       "website": "www.anjuke.com",
       "industryid": 0,
-      "opento": null,
+      "opento": "",
       "headcount": 0,
       "eligible": 0,
       "status": 0,
       "cityid": 0,
-      "address": null,
-      "reward": null,
-      "description": null,
+      "address": "",
+      "reward": "",
+      "description": "",
       "deadline": "2016-08-08",
       "userid": 1,
       "updatetime": "2016-08-06 00:38:00"
@@ -199,7 +253,7 @@ REJECTED(5, "拒绝");
 
 ### 获取首页分页列表接口
 
-* url:http://112.124.121.126:8080/postlist.action?industryId=2&pageSize=2&currentPage=1
+* url:http://112.124.121.126:8080/postlist.action?industryId=1&pageSize=2&currentPage=1
 * 请求参数说明：industryId：表示行业的分类ID，pageSize表示分页中每页包含几条数据，currentPage表示当前页号，从0开始
 * 请求方式：GET
 * 返回参数：
@@ -362,13 +416,13 @@ REJECTED(5, "拒绝");
 {
   "code": 0,
   "message": "success",
-  "result": 8（返回postID）
+  "result": 1（返回postID）
 }
 ```
 
 ### 查看Post接口
 
-* url: http://112.124.121.126:8080/getPostById.action?id=2
+* url: http://112.124.121.126:8080/getPostById.action?id=1
 * 请求方式：GET
 * 返回参数：
 
@@ -524,15 +578,15 @@ REJECTED(5, "拒绝");
         "industry": "Arts"
       }
     ],
-    "skills": null,
-    "location": null,
-    "email": null,
-    "tel": null,
-    "certificates": null,
-    "linkedinid": null,
-    "linkedinusername": null,
-    "linkedinprofileurl": null,
-    "facebook": null
+    "skills": "",
+    "location": "",
+    "email": "",
+    "tel": "",
+    "certificates": "",
+    "linkedinid": "",
+    "linkedinusername": "",
+    "linkedinprofileurl": "",
+    "facebook": ""
   }
 }
 ```
@@ -548,22 +602,22 @@ REJECTED(5, "拒绝");
     "userId":3,
     "token":"0a676539bdd470b4404eec6b115e0fae",
 
-    "realname": "王贵生",
+    "realname": "Mutto",
     "birthday": "2001-08-01",
     "sex": 1,
     "experience": "no experience",
     "university": "TJ",
     "majorid": 1,
     "industryids": "2,3",
-    "skills": null,
-    "location": "上海",
+    "skills": "",
+    "location": "shanghai",
     "email": "anytimekaka@163.com",
     "tel": "13900000000",
-    "certificates": null,
+    "certificates": "",
     "linkedinid": "anytimekaka",
-    "linkedinusername": null,
-    "linkedinprofileurl": null,
-    "facebook": null
+    "linkedinusername": "",
+    "linkedinprofileurl": "",
+    "facebook": ""
 }
 ```
 

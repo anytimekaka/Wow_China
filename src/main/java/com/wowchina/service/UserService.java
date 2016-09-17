@@ -44,7 +44,7 @@ public class UserService {
         status.add(MessageStatusEnum.ACCEPTED.getCode()); // 已接受
         status.add(MessageStatusEnum.APPLIED.getCode()); //已申请
         status.add(MessageStatusEnum.REJECTED.getCode()); //已拒绝
-        List<Message> applyMessageList = messageDao.queryMessageByUserIdAndStatus(userId, status);
+        List<MessageInfo> applyMessageList = messageDao.queryMessageByUserIdAndStatus(userId, status);
         CommonResponse response = CommonResponse.successResponse("获取Apply消息列表成功");
         response.setResult(applyMessageList);
         return response;
@@ -60,7 +60,7 @@ public class UserService {
 
         List<Integer> unReplyStatus = new ArrayList<Integer>();
         unReplyStatus.add(MessageStatusEnum.UNREPLY.getCode()); // 未回复
-        List<Message> unReplyMessageList = messageDao.queryMessageByUserIdAndStatus(userId, unReplyStatus);
+        List<MessageInfo> unReplyMessageList = messageDao.queryMessageByUserIdAndStatus(userId, unReplyStatus);
         PostMessageResponse unReplys = new PostMessageResponse();
         unReplys.setStatus(MessageStatusEnum.UNREPLY.getCode());
         unReplys.setDesc(MessageStatusEnum.UNREPLY.getValue());
@@ -69,7 +69,7 @@ public class UserService {
 
         List<Integer> repliedStatus = new ArrayList<Integer>();
         repliedStatus.add(MessageStatusEnum.REPLIED.getCode()); // 已回复
-        List<Message> repliedMessageList = messageDao.queryMessageByUserIdAndStatus(userId, repliedStatus);
+        List<MessageInfo> repliedMessageList = messageDao.queryMessageByUserIdAndStatus(userId, repliedStatus);
         PostMessageResponse repieds = new PostMessageResponse();
         repieds.setStatus(MessageStatusEnum.REPLIED.getCode());
         repieds.setDesc(MessageStatusEnum.REPLIED.getValue());
