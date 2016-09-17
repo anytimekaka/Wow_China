@@ -34,7 +34,7 @@ public class DemoController {
 	@RequestMapping(value = "/demo.action", method = RequestMethod.GET)
 	public @ResponseBody  CommonResponse demo(HttpServletRequest request,
 			Model model) {
-		CommonResponse resp = new CommonResponse();
+		CommonResponse resp = CommonResponse.successResponse();
 		System.out.println(this.uploadFilDir);
 		return resp;
 	}

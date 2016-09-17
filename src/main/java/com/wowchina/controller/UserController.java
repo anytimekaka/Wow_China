@@ -37,7 +37,7 @@ public class UserController {
     @RequestMapping(value = "/getPostMessageList.action", method = RequestMethod.GET)
     public @ResponseBody  CommonResponse getPostMessageList(@RequestParam int userId,
                                                 @RequestParam String token,
-                                                Model model) {
+                                                Model model){
         if(!this.userService.checkUser(userId, token)){
             return CommonResponse.authErrorResponse();
         }

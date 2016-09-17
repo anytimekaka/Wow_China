@@ -22,30 +22,36 @@ public class CommonResponse<T> implements Serializable{
      */
     private T result;
 
-    public CommonResponse(int code, String message){
+    private CommonResponse(int code, String message){
         this.code = code;
         this.message = message;
     }
 
-    public CommonResponse(){
+    private CommonResponse(){
         this.code=0;
         this.message="success";
     }
 
+    public static CommonResponse<String> getInstance(int code, String message){
+        CommonResponse<String> response = new CommonResponse<String>(code, message);
+        response.setResult("");
+        return response;
+    }
+
     public static CommonResponse successResponse(String message){
-        return new CommonResponse(0, message);
+        return CommonResponse.getInstance(0, message);
     }
 
     public static CommonResponse successResponse(){
-        return new CommonResponse(0, "success");
+        return CommonResponse.getInstance(0, "success");
     }
 
     public  static CommonResponse errorResponse(String message){
-        return new CommonResponse(1, message);
+        return CommonResponse.getInstance(1, message);
     }
 
     public  static CommonResponse errorResponse(int code, String message){
-        return new CommonResponse(code, message);
+        return CommonResponse.getInstance(code, message);
     }
 
     public static CommonResponse authErrorResponse(){

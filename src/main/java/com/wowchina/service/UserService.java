@@ -318,7 +318,7 @@ public class UserService {
      * @return
      */
     public CommonResponse login(User user){
-        CommonResponse response = new CommonResponse(0,"success");
+        CommonResponse response = CommonResponse.successResponse();
         user.setPassword(Parse2MD5.parseStrToMd5L32(user.getPassword()));
         User responseUser = this.userDao.login(user);
         if(null != responseUser){
@@ -340,11 +340,9 @@ public class UserService {
      * @return
      */
     public CommonResponse register(User user){
-        CommonResponse response = new CommonResponse(0,"success");
+        CommonResponse response = CommonResponse.successResponse();
         if(this.userDao.checkUsernameIsExist(user)){
-            response.setCode(1);
-            response.setMessage("username has been used");//用户名已被使用
-            return response;
+            return CommonResponse.errorResponse("username has been used");
         }
         String passwordmd5 = Parse2MD5.parseStrToMd5L32(user.getPassword());
         String token = Parse2MD5.parseStrToMd5L32(user.getUsername() + user.getPassword());
