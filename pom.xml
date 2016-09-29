@@ -165,6 +165,7 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>config.properties</include>
+                    <include>mybatis-config.xml</include>
 				</includes>
 				<filtering>true</filtering>
 			</resource>
