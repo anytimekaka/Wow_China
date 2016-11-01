@@ -34,7 +34,13 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
-		<dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.4.1</version>
+        </dependency>
+
+        <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.0</version>

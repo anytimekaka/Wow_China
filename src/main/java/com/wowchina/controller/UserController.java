@@ -289,6 +289,22 @@ public class UserController {
     }
 
     /**
+     * 添加Post
+     * @param req
+     * @return
+     */
+    @RequestMapping(value = "/addPostWithImage.action", method = RequestMethod.POST)
+    public @ResponseBody CommonResponse addPostWithImage(@RequestBody AddPostRequest req,
+                                                         @RequestParam("file") MultipartFile file,
+                                                         @RequestParam("userId") int userId,
+                                                         @RequestParam("token") String token){
+        if(!this.userService.checkUser(req.getUserId(), req.getToken())){
+            return CommonResponse.authErrorResponse();
+        }
+        return this.postService.addPost(req);
+    }
+
+    /**
      * 更新Post信息
      * @param req
      * @return
