@@ -422,7 +422,7 @@ REJECTED(5, "拒绝");
 
 ### 查看Post接口
 
-* url: http://112.124.121.126:8080/getPostById.action?id=1
+* url: http://112.124.121.126:8080/getPostById.action?id=13
 * 请求方式：GET
 * 返回参数：
 
@@ -653,7 +653,7 @@ REJECTED(5, "拒绝");
 * url: http://112.124.121.126:8080/addPostImages.action
 * 请求方式：Post
 * 请求参数：files：图片文件，可以一次上传多张图片，后端使用名称为files的数组处理；userId：用户ID；token：用户token；postId：关联postId
-* Post图片说明：图片名保存在Post信息的postimage字段，如：1478108790095.jpg,1478108790096.png，多张图片使用逗号分割 图片资源url：http://112.124.121.126:8080/userimage/1478108790096.jpg
+* Post图片说明：图片名保存在Post信息的postimage字段，如：1478110612797.jpg,1478110612798.png，多张图片使用逗号分割 图片资源url：http://112.124.121.126:8080/userimage/1478110612797.jpg
 * 返回参数：
 
 ```json
