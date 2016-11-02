@@ -452,7 +452,8 @@ REJECTED(5, "拒绝");
       "description": "乐队鼓手",
       "deadline": "2016-08-08",
       "userid": 3,
-      "updatetime": "2016-08-13 13:58:03"
+      "updatetime": "2016-08-13 13:58:03",
+      "postimage":"1478108790095.jpg,1478108790096.png"
     },
     "industry": {
       "id": 2,
@@ -643,6 +644,22 @@ REJECTED(5, "拒绝");
 {
   "code": 0,
   "message": "update userInfo success",
+  "result": null
+}
+```
+
+### 为Post添加图片接口
+
+* url: http://112.124.121.126:8080/addPostImages.action
+* 请求方式：Post
+* 请求参数：files：图片文件，可以一次上传多张图片，后端使用名称为files的数组处理；userId：用户ID；token：用户token；postId：关联postId
+* Post图片说明：图片名保存在Post信息的postimage字段，如：1478108790095.jpg,1478108790096.png，多张图片使用逗号分割 图片资源url：http://112.124.121.126:8080/userimage/1478108790096.jpg
+* 返回参数：
+
+```json
+{
+  "code": 0,
+  "message": "success",
   "result": null
 }
 ```

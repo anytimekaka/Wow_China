@@ -99,4 +99,10 @@ public class PostService {
         return commonResponse;
     }
 
+    public CommonResponse<String> updatePost(Post post){
+        postDao.updatePost(post);
+        CommonResponse commonResponse = CommonResponse.successResponse();
+        return commonResponse;
+    }
+
 }

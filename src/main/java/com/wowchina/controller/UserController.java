@@ -1,9 +1,6 @@
 package com.wowchina.controller;
 
-import com.wowchina.domain.Apply;
-import com.wowchina.domain.PostItem;
-import com.wowchina.domain.User;
-import com.wowchina.domain.UserInfo;
+import com.wowchina.domain.*;
 import com.wowchina.model.AddPostRequest;
 import com.wowchina.model.CommonResponse;
 import com.wowchina.model.EditUserInfoRequest;
@@ -16,10 +13,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -289,19 +292,47 @@ public class UserController {
     }
 
     /**
-     * 添加Post
-     * @param req
+     * 更新post的图片
      * @return
      */
-    @RequestMapping(value = "/addPostWithImage.action", method = RequestMethod.POST)
-    public @ResponseBody CommonResponse addPostWithImage(@RequestBody AddPostRequest req,
-                                                         @RequestParam("file") MultipartFile file,
+    @RequestMapping(value = "/addPostImages.action", method = RequestMethod.POST)
+    public @ResponseBody CommonResponse addPostWithImages(@RequestParam(value = "files", required = false) CommonsMultipartFile[] files,
                                                          @RequestParam("userId") int userId,
-                                                         @RequestParam("token") String token){
-        if(!this.userService.checkUser(req.getUserId(), req.getToken())){
+                                                         @RequestParam("token") String token,
+                                                         @RequestParam("postId") int postId){
+        if(!this.userService.checkUser(userId, token)){
             return CommonResponse.authErrorResponse();
         }
-        return this.postService.addPost(req);
+        // 用于在DB中保存图片名称
+        String postImage = "";
+        for(int i = 0;i<files.length;i++) {
+            if (!files[i].isEmpty()) {
+                long basic = System.currentTimeMillis();
+                try {
+                    String originalFilename = files[i].getOriginalFilename();
+                    String fileType = originalFilename.substring(originalFilename.lastIndexOf("."));
+                    String fileDBName = basic + i + fileType;
+                    String filePath = this.uploadFileDir + fileDBName;
+//                    File file = new File(filePath);
+//                    if(!file.exists()){
+//                        file.
+//                    }
+                    files[i].transferTo(new File(filePath));
+                    if(i != 0){
+                        postImage = postImage + ",";
+                    }
+                    postImage = postImage + fileDBName;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("上传出错");
+                    return CommonResponse.errorResponse("上传文件出现异常");
+                }
+            }
+        }
+        Post post = new Post();
+        post.setId(postId);
+        post.setPostimage(postImage);
+        return this.postService.updatePost(post);
     }
 
     /**

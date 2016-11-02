@@ -22,7 +22,8 @@
         description,
         deadline,
         userid,
-        updatetime
+        updatetime,
+        postimage
     </sql>
 
     <sql id="noIdFields">
@@ -39,7 +40,8 @@
         description,
         deadline,
         userid,
-        updatetime
+        updatetime,
+        postimage
     </sql>
 
     <select id="getPostInfoById" resultType="post" parameterType="int">
@@ -65,7 +67,7 @@
         <include refid="tableName"/>
         (<include refid="noIdFields"/>)
         VALUES
-        (#{title},#{company},#{website},#{industryid},#{opento},#{headcount},#{eligible},#{cityid},#{address},#{reward},#{description},#{deadline},#{userid},now())
+        (#{title},#{company},#{website},#{industryid},#{opento},#{headcount},#{eligible},#{cityid},#{address},#{reward},#{description},#{deadline},#{userid},now(),#{postimage})
     </insert>
 
     <update id="updatePost" parameterType="post">
@@ -107,6 +109,9 @@
         </if>
         <if test="deadline!=null and deadline!=''">
             deadline = #{deadline},
+        </if>
+        <if test="postimage!=null and postimage!=''">
+            postimage = #{postimage},
         </if>
         <if test="userid!=0">
             userid = #{userid},

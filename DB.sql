@@ -107,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `intern`.`major_post_map` (
   PRIMARY KEY (`id`) COMMENT '主键')
   ENGINE = InnoDB COMMENT '面向专业与post的映射表';
 
+alter table `post` add `postimage` varchar(200) COMMENT 'post图片名称';
 
 INSERT INTO `industry` (`industry`) VALUES ('Administration and office support');
 INSERT INTO `industry` (`industry`) VALUES ('Advertising');
